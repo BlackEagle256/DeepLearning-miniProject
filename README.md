@@ -161,3 +161,6 @@ uncertainty, interpretability — weights in `config.yaml`) and cached in
   tables/plots with error bars, learning/validation-curve analysis,
   XAI + mechanical interpretation, Original vs Discrete comparison,
   final trusted-surrogate recommendation, limitations & future work.
+
+
+- `.\run_all.ps1`
