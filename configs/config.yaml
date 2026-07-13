@@ -1,0 +1,171 @@
+# =============================================================================
+# Global project configuration
+# Project: Overfitting-Resistant Surrogate Models for Friction-Processed
+#          Composites (Small Experimental Datasets)
+# Course : Deep Learning - Dr. Bahaghighat
+# =============================================================================
+
+project_name: "surrogate-composites"
+
+paths:
+  raw_data_dir: "data/raw"
+  discrete_data_dir: "data/discrete"
+  results_dir: "results"
+  # MLflow uses a local SQLite backend (mlflow.db at repo root, set in
+  # src/tracking/mlflow_utils.py) - not a plain folder store - because
+  # recent MLflow versions block the folder-based store by default.
+
+# ---------------------------------------------------------------------------
+# Reproducibility
+# Fixed base seed + 5 different seeds (project requirement: repeat every
+# experiment with 5 seeds because results on small data are seed-sensitive).
+# ---------------------------------------------------------------------------
+reproducibility:
+  base_seed: 42
+  seeds: [42, 123, 7, 2024, 99]
+
+# ---------------------------------------------------------------------------
+# Cross-validation setup (the overall evaluation framework: k-Fold / LOOCV /
+# Nested CV as required by Table 2 of the assignment).
+# ---------------------------------------------------------------------------
+cross_validation:
+  n_splits: 5          # k-Fold (k=5) - main protocol
+  shuffle: true
+  use_loocv: false     # set true to switch to Leave-One-Out CV
+  nested:
+    outer_splits: 5
+    inner_splits: 3
+
+# ---------------------------------------------------------------------------
+# Datasets
+# NOTE:
+#   * "No." is an index column (extra column) -> always dropped.
+#   * "Composite Volume Fraction (%)" is binary:
+#       - constant 0 in Dataset_0136  -> non-informative, dropped there
+#       - constant 1 in Dataset_3772  -> non-informative, dropped there
+#       - varying (0/1) only in Dataset_0172 -> kept only there
+#     Constant features carry no predictive information, must NOT appear as
+#     meaningful in Feature Importance, and are removed to avoid numerical
+#     issues (per the assignment text).
+#   * Level A (per-dataset analysis): each dataset uses its own outputs.
+#   * Level B (cross-dataset comparison): only the shared outputs are used.
+# ---------------------------------------------------------------------------
+datasets:
+  Dataset_0136:
+    file: "Dataset_0136.xlsx"
+    n_samples: 36
+    index_column: "No."
+    inputs:
+      - "Tool Shape"
+      - "Rotational Speed"
+      - "Plunging Speed"
+      - "Composite Volume Fraction (%)"
+    outputs:
+      - "Si Particle Size (um)"
+      - "Hardness (HV)"
+      - "wear rate"
+      - "Ultimate Compression Strength (MPa)"
+      - "Elongation (%)"
+      - "Temperature (°C)"   # Level A only (exists only in this dataset)
+      - "Strain"             # Level A only (exists only in this dataset)
+
+  Dataset_0172:
+    file: "Dataset_0172.xlsx"
+    n_samples: 72
+    index_column: "No."
+    inputs:
+      - "Tool Shape"
+      - "Rotational Speed"
+      - "Plunging Speed"
+      - "Composite Volume Fraction (%)"
+    outputs:
+      - "Si Particle Size (um)"
+      - "Hardness (HV)"
+      - "wear rate"
+      - "Ultimate Compression Strength (MPa)"
+      - "Elongation (%)"
+
+  Dataset_3772:
+    file: "Dataset_3772.xlsx"
+    n_samples: 36
+    index_column: "No."
+    inputs:
+      - "Tool Shape"
+      - "Rotational Speed"
+      - "Plunging Speed"
+      - "Composite Volume Fraction (%)"
+    outputs:
+      - "Si Particle Size (um)"
+      - "Hardness (HV)"
+      - "wear rate"
+      - "Ultimate Compression Strength (MPa)"
+      - "Elongation (%)"
+
+# Outputs shared by ALL three datasets -> basis of Level B comparison
+shared_outputs:
+  - "Si Particle Size (um)"
+  - "Hardness (HV)"
+  - "wear rate"
+  - "Ultimate Compression Strength (MPa)"
+  - "Elongation (%)"
+
+# ---------------------------------------------------------------------------
+# Models (Section 2.1 + Phase 3 of the assignment)
+# Linear Regression is the baseline. ANN must stay shallow (1 hidden layer,
+# 8-32 neurons, ReLU, Adam). LightGBM appears in the Phase-3 list, so it is
+# included as an optional extra model.
+# ---------------------------------------------------------------------------
+models:
+  - "linear_regression"   # Baseline
+  - "ridge"
+  - "elasticnet"
+  - "svr_rbf"
+  - "gpr"                 # Gaussian Process Regression (Kriging)
+  - "random_forest"
+  - "extra_trees"
+  - "gradient_boosting"
+  - "xgboost"
+  - "ann"                 # shallow MLPRegressor
+  - "lightgbm"            # optional (listed in Phase 3 pipeline models)
+
+# ---------------------------------------------------------------------------
+# Uncertainty quantification
+# ---------------------------------------------------------------------------
+uncertainty:
+  confidence_level: 0.95
+  bootstrap_iterations: 200
+
+# ---------------------------------------------------------------------------
+# Hyperparameter optimization
+# Random Search for ALL models; Bayesian optimization (Optuna) ONLY for the
+# Top-3 models. Grid Search is forbidden (small data).
+# ---------------------------------------------------------------------------
+tuning:
+  random_search_iterations: 30
+  optuna_trials: 50
+
+# ---------------------------------------------------------------------------
+# Multi-criteria Top-3 selection weights (Phase 5)
+# Criteria: accuracy (R2/RMSE/MAE), generalization gap, fold stability,
+# uncertainty (PI width) and interpretability.
+# ---------------------------------------------------------------------------
+top3_selection:
+  weights:
+    accuracy: 0.30
+    generalization_gap: 0.25
+    fold_stability: 0.20
+    uncertainty: 0.15
+    interpretability: 0.10
+  # Simple ordinal interpretability prior (1 = most interpretable)
+  interpretability_rank:
+    linear_regression: 1
+    ridge: 1
+    elasticnet: 1
+    gpr: 2
+    random_forest: 3
+    extra_trees: 3
+    gradient_boosting: 3
+    xgboost: 3
+    lightgbm: 3
+    svr_rbf: 4
+    ann: 5
