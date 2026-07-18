@@ -44,7 +44,7 @@ surrogate-composites/
 │   ├── eda/                     # visualization, statistics, outlier detection
 │   ├── models/registry.py       # 11 models + Random-Search spaces (single source of truth)
 │   ├── pipelines/               # CV engine, single-output, multi-output runners
-│   ├── evaluation/              # metrics, uncertainty, overfitting, stats tests, Top-3
+│   ├── evaluation.py            # metrics, uncertainty, overfitting, stats tests, Top-3
 │   ├── tuning/                  # Random Search (all) + Optuna (Top-3 only; NO Grid Search)
 │   ├── xai/                     # SHAP, LIME, permutation / tree importance
 │   ├── tracking/                # MLflow logging helpers
@@ -142,8 +142,8 @@ uncertainty, interpretability — weights in `config.yaml`) and cached in
 | Fixed seed 42 + repetition over 5 seeds | `configs/config.yaml`, `src/pipelines/cross_validation.py` |
 | Shallow ANN only (1 hidden layer, 8–32 neurons, ReLU, Adam, early stopping) | `src/models/registry.py` |
 | Overfitting management (L1/L2, early stopping, tree depth / min_samples_leaf, kernel regularization, k-Fold/LOOCV/Nested CV) | `src/models/registry.py`, `src/pipelines/cross_validation.py` |
-| Metrics: R², RMSE, NRMSE, MAE + Train/Test gap + fold stability | `src/evaluation/metrics.py` |
-| PI for GPR + Bootstrap PI for the rest | `src/evaluation/uncertainty.py` |
+| Metrics: R², RMSE, NRMSE, MAE + Train/Test gap + fold stability | `src/evaluation.py` |
+| PI for GPR + Bootstrap PI for the rest | `src/evaluation.py` |
 | Random Search for all, Optuna for Top-3, **no Grid Search** | `src/tuning/hyperparameter.py` |
 | Level A (per-dataset outputs) vs Level B (shared outputs only) | `configs/config.yaml` (`shared_outputs`), `DatasetBundle.shared_Y()` |
 | Temperature / Strain analysed only in Dataset_0136 (Level A) | `configs/config.yaml` |

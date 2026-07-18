@@ -16,7 +16,7 @@ from sklearn.model_selection import KFold
 from _pipeline_common import read_top3_models
 from src.config import get_base_seed, get_path, load_config
 from src.data.loader import load_all_datasets
-from src.evaluation.uncertainty import (
+from src.evaluation import (
     bootstrap_prediction_interval,
     gpr_prediction_interval,
     interval_metrics,

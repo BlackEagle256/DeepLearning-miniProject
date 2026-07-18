@@ -12,7 +12,7 @@ import _bootstrap  # noqa: F401
 import pandas as pd
 
 from src.config import get_path
-from src.evaluation.statistical_tests import friedman_test, nemenyi_posthoc, wilcoxon_pairwise
+from src.evaluation import friedman_test, nemenyi_posthoc, wilcoxon_pairwise
 from src.utils.io import save_table
 
 

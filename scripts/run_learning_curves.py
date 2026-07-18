@@ -9,7 +9,7 @@ import _bootstrap  # noqa: F401
 from _pipeline_common import read_top3_models
 from src.config import get_base_seed, get_path, load_config
 from src.data.loader import load_all_datasets
-from src.evaluation.overfitting import compute_learning_curve, plot_learning_curve
+from src.evaluation import compute_learning_curve, plot_learning_curve
 from src.models.registry import build_model
 from src.utils.io import save_figure, save_table
 

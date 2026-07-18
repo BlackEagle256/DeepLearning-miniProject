@@ -6,8 +6,7 @@ import pandas as pd
 
 from src.config import get_path, load_config
 from src.data.loader import load_all_datasets
-from src.evaluation.metrics import aggregate_fold_results
-from src.evaluation.model_selection import select_top3
+from src.evaluation import aggregate_fold_results, select_top3
 from src.utils.io import save_table
 
 

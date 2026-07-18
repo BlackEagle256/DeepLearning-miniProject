@@ -18,7 +18,7 @@ from sklearn.base import clone
 from sklearn.model_selection import KFold, LeaveOneOut
 
 from src.config import load_config
-from src.evaluation.metrics import compute_metrics
+from src.evaluation import compute_metrics
 from src.utils.seeds import set_global_seed
 
 
