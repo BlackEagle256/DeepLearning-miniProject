@@ -12,6 +12,8 @@ import numpy as np
 import pandas as pd
 from sklearn.inspection import permutation_importance
 
+from src.models.registry import unwrap_pipeline
+
 
 def compute_permutation_importance(
     fitted_pipeline, X: pd.DataFrame, y, seed: int = 42, n_repeats: int = 30
@@ -40,7 +42,7 @@ def compute_permutation_importance(
 
 def tree_feature_importance(fitted_pipeline, feature_names: list[str]) -> pd.DataFrame:
     """Impurity-based feature importances from a fitted tree model."""
-    model = fitted_pipeline.named_steps["model"]
+    model = unwrap_pipeline(fitted_pipeline).named_steps["model"]
     if not hasattr(model, "feature_importances_"):
         raise TypeError(f"{type(model).__name__} has no feature_importances_.")
     return (
@@ -57,8 +59,9 @@ def treeinterpreter_contributions(fitted_pipeline, X: pd.DataFrame) -> pd.DataFr
     """
     from treeinterpreter import treeinterpreter as ti
 
-    scaler = fitted_pipeline.named_steps["scaler"]
-    model = fitted_pipeline.named_steps["model"]
+    inner = unwrap_pipeline(fitted_pipeline)
+    scaler = inner.named_steps["scaler"]
+    model = inner.named_steps["model"]
     X_scaled = scaler.transform(X.to_numpy())
     _, bias, contributions = ti.predict(model, X_scaled)
     contrib_df = pd.DataFrame(np.squeeze(contributions), columns=X.columns, index=X.index)

@@ -55,6 +55,8 @@ switch ($Task) {
         Invoke-Step "python scripts\run_pipeline4_multi_discrete.py"
         Invoke-Step "python scripts\run_tuning_top3.py"
         Invoke-Step "python scripts\run_xai.py"
+        Invoke-Step "python scripts\run_uncertainty.py"
+        Invoke-Step "python scripts\run_learning_curves.py"
         Invoke-Step "python scripts\run_stat_tests.py"
     }
 }

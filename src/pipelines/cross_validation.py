@@ -40,19 +40,36 @@ def cross_validate_model(
     Works for both single-output (Series) and multi-output (DataFrame) ``y``.
     For LOOCV single test points, per-fold R2/NRMSE are undefined; use k-fold
     for per-fold statistics or aggregate LOOCV predictions externally.
+
+    For multi-output ``y`` (DataFrame with >1 column), per-target metrics are
+    ADDED alongside the aggregate ones (e.g. ``test_Hardness (HV)__rmse``),
+    keyed as ``{train,test}_{target}__{metric}``. This is required to compare
+    Multi-output against Single-output fairly: sklearn's aggregate multi-output
+    RMSE is sqrt(mean of per-target MSE), which by the RMS/QM-AM inequality is
+    ALWAYS >= the mean of per-target RMSEs used for Single-output - comparing
+    the two aggregates directly is a scale artifact, not a real effect.
     """
     set_global_seed(seed)
     splitter = _make_splitter(seed)
     X_np, y_np = X.to_numpy(), np.asarray(y)
+    target_names = list(y.columns) if isinstance(y, pd.DataFrame) and y.shape[1] > 1 else None
 
     rows: list[dict] = []
     for fold_idx, (tr, te) in enumerate(splitter.split(X_np)):
         model = clone(estimator)
         model.fit(X_np[tr], y_np[tr])
+        y_tr_pred = model.predict(X_np[tr])
+        y_te_pred = model.predict(X_np[te])
 
         row: dict = {"seed": seed, "fold": fold_idx}
-        row.update(compute_metrics(y_np[tr], model.predict(X_np[tr]), prefix="train_"))
-        row.update(compute_metrics(y_np[te], model.predict(X_np[te]), prefix="test_"))
+        row.update(compute_metrics(y_np[tr], y_tr_pred, prefix="train_"))
+        row.update(compute_metrics(y_np[te], y_te_pred, prefix="test_"))
+
+        if target_names is not None:
+            for j, col in enumerate(target_names):
+                row.update(compute_metrics(y_np[tr][:, j], y_tr_pred[:, j], prefix=f"train_{col}__"))
+                row.update(compute_metrics(y_np[te][:, j], y_te_pred[:, j], prefix=f"test_{col}__"))
+
         rows.append(row)
 
     return pd.DataFrame(rows)

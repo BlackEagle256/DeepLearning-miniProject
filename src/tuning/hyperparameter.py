@@ -115,10 +115,11 @@ def _suggest_params(trial, model_name: str) -> dict:
             "model__min_child_samples": trial.suggest_int("model__min_child_samples", 2, 6),
         }
     if model_name == "ann":
+        # ANN is wrapped in TransformedTargetRegressor -> params nest under "regressor__".
         return {
-            "model__hidden_layer_sizes": (trial.suggest_int("hidden_units", 8, 32),),
-            "model__alpha": trial.suggest_float("model__alpha", 1e-4, 1.0, log=True),
-            "model__learning_rate_init": trial.suggest_float(
+            "regressor__model__hidden_layer_sizes": (trial.suggest_int("hidden_units", 8, 32),),
+            "regressor__model__alpha": trial.suggest_float("model__alpha", 1e-4, 1.0, log=True),
+            "regressor__model__learning_rate_init": trial.suggest_float(
                 "model__learning_rate_init", 1e-4, 1e-2, log=True
             ),
         }

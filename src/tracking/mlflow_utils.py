@@ -11,10 +11,17 @@ artifact tables) is logged to a local SQLite-backed MLflow tracking store
 
 from __future__ import annotations
 
+import re
 import tempfile
 from pathlib import Path
 
 import pandas as pd
+
+_INVALID_METRIC_CHARS = re.compile(r"[^a-zA-Z0-9_\-. /]")
+
+
+def _sanitize_metric_name(name: str) -> str:
+    return _INVALID_METRIC_CHARS.sub("_", name)
 
 from src.config import PROJECT_ROOT
 
@@ -63,8 +70,9 @@ def log_cv_results(
     with mlflow.start_run(run_name=run_name):
         mlflow.log_params(params)
         for col in metric_cols:
-            mlflow.log_metric(f"{col}_mean", float(means[col]))
-            mlflow.log_metric(f"{col}_std", float(stds[col]))
+            safe_col = _sanitize_metric_name(col)
+            mlflow.log_metric(f"{safe_col}_mean", float(means[col]))
+            mlflow.log_metric(f"{safe_col}_std", float(stds[col]))
         # Generalization gap = the project's primary overfitting signal.
         mlflow.log_metric("gap_r2", float(abs(means["train_r2"] - means["test_r2"])))
         mlflow.log_metric("gap_rmse", float(abs(means["train_rmse"] - means["test_rmse"])))

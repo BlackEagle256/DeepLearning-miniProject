@@ -6,4 +6,6 @@ python scripts/run_pipeline3_single_discrete.py
 python scripts/run_pipeline4_multi_discrete.py
 python scripts/run_tuning_top3.py
 python scripts/run_xai.py
+python scripts/run_uncertainty.py
+python scripts/run_learning_curves.py
 python scripts/run_stat_tests.py

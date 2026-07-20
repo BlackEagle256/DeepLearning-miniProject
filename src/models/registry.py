@@ -25,6 +25,7 @@ from typing import Callable
 
 import numpy as np
 from scipy.stats import loguniform, randint, uniform
+from sklearn.compose import TransformedTargetRegressor
 from sklearn.ensemble import (
     ExtraTreesRegressor,
     GradientBoostingRegressor,
@@ -158,16 +159,41 @@ def available_models(seed: int = 42) -> list[str]:
     return list(_estimator_factories(seed).keys())
 
 
-def build_model(name: str, seed: int = 42) -> Pipeline:
+def unwrap_pipeline(estimator):
+    """Return the inner ``scaler -> model`` Pipeline for a fitted estimator.
+
+    ``build_model("ann", ...)`` returns a ``TransformedTargetRegressor``
+    (needed for y-scaling), not a bare ``Pipeline``, so code that reaches
+    into ``.named_steps`` (SHAP, tree/permutation importance, GPR PI) must
+    unwrap it first. A no-op for every other model.
+    """
+    if isinstance(estimator, TransformedTargetRegressor):
+        return estimator.regressor_ if hasattr(estimator, "regressor_") else estimator.regressor
+    return estimator
+
+
+def build_model(name: str, seed: int = 42):
     """Build the full pipeline ``StandardScaler -> estimator`` for one model.
 
     Scaling inside the pipeline guarantees it is (re)fitted on the training
     fold only during cross-validation -> no data leakage.
+
+    The ANN is additionally wrapped in a ``TransformedTargetRegressor`` that
+    standardizes ``y`` (fit on the training fold only, exactly like the
+    feature scaler). MLPRegressor is trained with gradient descent (Adam),
+    so on unscaled targets whose magnitude differs from the network's
+    default weight/activation scale (e.g. Temperature ~350, Hardness ~40-100)
+    it fails to converge even on the training data. Every other model here
+    is scale-invariant in y (closed-form linear solvers, tree splits, kernel
+    normalize_y) and does not need this.
     """
     factories = _estimator_factories(seed)
     if name not in factories:
         raise KeyError(f"Unknown or unavailable model '{name}'. Available: {list(factories)}")
-    return Pipeline([("scaler", StandardScaler()), ("model", factories[name]())])
+    pipe = Pipeline([("scaler", StandardScaler()), ("model", factories[name]())])
+    if name == "ann":
+        return TransformedTargetRegressor(regressor=pipe, transformer=StandardScaler())
+    return pipe
 
 
 # ---------------------------------------------------------------------------
@@ -227,9 +253,11 @@ SEARCH_SPACES: dict[str, dict] = {
         "model__reg_alpha": loguniform(1e-3, 1e1),
         "model__reg_lambda": loguniform(1e-2, 1e1),
     },
+    # ANN is wrapped in TransformedTargetRegressor (y-scaling) -> params live
+    # one level deeper, under "regressor__" (the inner scaler+MLP pipeline).
     "ann": {
-        "model__hidden_layer_sizes": [(h,) for h in (8, 12, 16, 24, 32)],
-        "model__alpha": loguniform(1e-4, 1e0),
-        "model__learning_rate_init": loguniform(1e-4, 1e-2),
+        "regressor__model__hidden_layer_sizes": [(h,) for h in (8, 12, 16, 24, 32)],
+        "regressor__model__alpha": loguniform(1e-4, 1e0),
+        "regressor__model__learning_rate_init": loguniform(1e-4, 1e-2),
     },
 }

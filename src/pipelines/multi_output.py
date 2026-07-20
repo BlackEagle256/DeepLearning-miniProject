@@ -18,8 +18,12 @@ from src.pipelines.cross_validation import cross_validate_multi_seed
 from src.tracking.mlflow_utils import log_cv_results
 
 
-def build_multioutput_model(name: str, seed: int) -> Pipeline:
-    """Build a scaler+estimator pipeline that handles multi-output targets."""
+def build_multioutput_model(name: str, seed: int):
+    """Build a scaler+estimator pipeline that handles multi-output targets.
+
+    Returns a ``Pipeline`` for most models, or the ``TransformedTargetRegressor``
+    that ``build_model`` uses to y-scale the ANN (still natively multi-output).
+    """
     pipe = build_model(name, seed=seed)
     if name not in NATIVE_MULTIOUTPUT:
         # Wrap only the estimator step; the scaler stays shared.

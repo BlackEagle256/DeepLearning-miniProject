@@ -1,9 +1,20 @@
 """Phase 7 - statistical comparisons.
 
 1. Friedman test + Nemenyi post-hoc across models (per-fold test RMSE).
-2. Wilcoxon signed-rank: Single-output vs Multi-output per model (paired
-   over identical seed/fold blocks) to answer "does Multi-output have a
-   significant advantage?".
+2. Wilcoxon signed-rank: Single-output vs Multi-output per model, compared
+   PER TARGET (paired over identical target/seed/fold blocks) to answer
+   "does Multi-output have a significant advantage?".
+
+   IMPORTANT: this must compare RMSE for the SAME physical target on both
+   sides. Pipeline 2's aggregate ``test_rmse`` is sqrt(mean of per-target
+   MSE across all outputs); Pipeline 1's ``test_rmse`` is the RMSE of ONE
+   target. By the RMS/QM-AM inequality, sqrt(mean(x_i^2)) >= mean(|x_i|)
+   ALWAYS holds, so comparing those two aggregates directly makes Multi
+   look uniformly worse regardless of the data (a scale artifact, not a
+   finding). Instead we use the per-target columns
+   (``test_{target}__rmse``) that ``cross_validate_model`` adds for
+   multi-output runs, so both sides measure the same target in the same
+   units.
 Inputs: fold_results.csv files of pipelines 1 and 2.
 """
 
@@ -36,24 +47,40 @@ def main() -> None:
         save_table(nemenyi, out_dir / f"nemenyi_{ds_name}.csv", index=True)
     save_table(pd.DataFrame(friedman_rows), out_dir / "friedman_across_models.csv")
 
-    # ---- Wilcoxon: Single vs Multi output (paired per seed/fold) ----
-    single = (
-        p1.groupby(["dataset", "model", "seed", "fold"])["test_rmse"].mean().rename("single")
+    # ---- Wilcoxon: Single vs Multi output, paired PER TARGET/seed/fold ----
+    per_target_cols = [
+        c for c in p2.columns if c.startswith("test_") and c.endswith("__rmse")
+    ]
+    multi_long = p2.melt(
+        id_vars=["dataset", "model", "seed", "fold"],
+        value_vars=per_target_cols,
+        var_name="target",
+        value_name="multi_rmse",
     )
-    multi = (
-        p2.groupby(["dataset", "model", "seed", "fold"])["test_rmse"].mean().rename("multi")
+    multi_long["target"] = (
+        multi_long["target"].str.removeprefix("test_").str.removesuffix("__rmse")
     )
-    paired = pd.concat([single, multi], axis=1).dropna().reset_index()
+
+    single_long = (
+        p1.groupby(["dataset", "model", "target", "seed", "fold"])["test_rmse"]
+        .mean()
+        .rename("single_rmse")
+        .reset_index()
+    )
+    paired = single_long.merge(
+        multi_long, on=["dataset", "model", "target", "seed", "fold"], how="inner"
+    )
 
     wilcoxon_rows = []
     for (ds_name, model), grp in paired.groupby(["dataset", "model"]):
-        res = wilcoxon_pairwise(grp["single"], grp["multi"])
+        res = wilcoxon_pairwise(grp["single_rmse"], grp["multi_rmse"])
         wilcoxon_rows.append(
             {
                 "dataset": ds_name,
                 "model": model,
-                "mean_rmse_single": grp["single"].mean(),
-                "mean_rmse_multi": grp["multi"].mean(),
+                "n_paired_target_fold_obs": len(grp),
+                "mean_rmse_single": grp["single_rmse"].mean(),
+                "mean_rmse_multi": grp["multi_rmse"].mean(),
                 **res,
             }
         )

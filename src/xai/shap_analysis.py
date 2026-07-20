@@ -17,6 +17,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from src.models.registry import unwrap_pipeline
 from src.utils.io import ensure_dir
 
 
@@ -36,8 +37,9 @@ def _explainer_for(fitted_pipeline, X_background: pd.DataFrame):
     """
     import shap
 
-    model = fitted_pipeline.named_steps["model"]
-    scaler = fitted_pipeline.named_steps["scaler"]
+    inner = unwrap_pipeline(fitted_pipeline)
+    model = inner.named_steps["model"]
+    scaler = inner.named_steps["scaler"]
     tree_types = (
         "RandomForestRegressor",
         "ExtraTreesRegressor",
@@ -120,10 +122,11 @@ def generate_all_shap_plots(
 
     # Feature interaction (tree models expose exact interaction values)
     try:
-        model = fitted_pipeline.named_steps["model"]
+        inner = unwrap_pipeline(fitted_pipeline)
+        model = inner.named_steps["model"]
         explainer = shap.TreeExplainer(model)
         inter = explainer.shap_interaction_values(
-            fitted_pipeline.named_steps["scaler"].transform(X)
+            inner.named_steps["scaler"].transform(X)
         )
         mean_inter = np.abs(inter).mean(axis=0)
         fig, ax = plt.subplots(figsize=(6, 5))

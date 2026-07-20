@@ -28,7 +28,13 @@ xai:
 stats:
 	$(PY) scripts/run_stat_tests.py
 
+uncertainty:
+	$(PY) scripts/run_uncertainty.py
+
+learning-curves:
+	$(PY) scripts/run_learning_curves.py
+
 mlflow-ui:
 	mlflow ui --backend-store-uri sqlite:///mlflow.db
 
-all: eda pipeline1 pipeline2 discretize pipeline3 pipeline4 tune xai stats
+all: eda pipeline1 pipeline2 discretize pipeline3 pipeline4 tune xai uncertainty learning-curves stats
