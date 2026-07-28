@@ -311,15 +311,23 @@ def xai_for_dataset(dataset_name: str, top3: list[str]) -> None:
 
 
 def uncertainty_for_dataset(dataset_name: str, top3: list[str]) -> None:
+    """Prediction intervals for EVERY model (assignment: GPR gets the analytical
+    PI, "sayer model-ha" - all OTHER models - get the Bootstrap PI; this is a
+    Section-2.1 general-model rule, not a Top-3-only rule like tuning/XAI/
+    learning-curves, whose reduced scope is explicitly authorized by Phase 5
+    "jahat kahesh hajm ejra". ``top3`` is kept only to flag those rows with
+    ``is_top3=True`` for convenient downstream filtering.
+    """
     import numpy as np
     from sklearn.model_selection import KFold
 
     from src.evaluation import bootstrap_prediction_interval, gpr_prediction_interval, interval_metrics
-    from src.models.registry import build_model
+    from src.models.registry import available_models, build_model
 
     seed = get_base_seed()
     n_splits = load_config()["cross_validation"]["n_splits"]
-    models = sorted(set(top3) | {"gpr"})
+    env_models = set(available_models())
+    models = sorted(m for m in load_config()["models"] if m in env_models)
 
     bundle = load_dataset(dataset_name)
     X = bundle.X.to_numpy()
@@ -344,7 +352,13 @@ def uncertainty_for_dataset(dataset_name: str, top3: list[str]) -> None:
             metrics = interval_metrics(
                 np.concatenate(y_true_all), np.concatenate(lo_all), np.concatenate(hi_all)
             )
-            rows.append({"dataset": dataset_name, "target": target, "model": model_name, **metrics})
+            rows.append({
+                "dataset": dataset_name,
+                "target": target,
+                "model": model_name,
+                "is_top3": model_name in top3,
+                **metrics,
+            })
             print(f"[uncertainty] {dataset_name} / {target} / {model_name}: {metrics}")
 
     save_table(pd.DataFrame(rows), get_path("results_dir") / "uncertainty" / dataset_name / "prediction_intervals.csv")
