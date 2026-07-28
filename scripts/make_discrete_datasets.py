@@ -1,4 +1,8 @@
-"""Phase 5 - build the three Discrete Input datasets (CSV + mapping JSON)."""
+"""Phase 5 - convenience wrapper: build all three Discrete-Input datasets.
+
+The actual per-dataset deliverable is
+``scripts/<dataset>/run_discretize.py``.
+"""
 
 import _bootstrap  # noqa: F401
 
