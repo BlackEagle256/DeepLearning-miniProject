@@ -5,14 +5,14 @@ Models (Section 2.1 / Phase 3 of the assignment):
     4. SVR-RBF                        5. GPR (Kriging)  6. Random Forest
     7. Extra Trees                    8. Gradient Boosting
     9. XGBoost                       10. shallow ANN (MLPRegressor)
-   11. LightGBM (extra, listed in the Phase-3 pipeline model list)
+   11. LightGBM (listed in the Phase-3 pipeline model list)
 
 Design rules enforced here:
   * Every model is wrapped in a sklearn ``Pipeline`` whose FIRST step is a
     ``StandardScaler``. Because scaling lives INSIDE the pipeline, it is
     fitted only on the training part of each CV fold -> no data leakage.
   * The ANN is intentionally shallow: 1 hidden layer, 8-32 neurons, ReLU,
-    Adam, with early stopping. Deep ANNs are forbidden by the assignment.
+    Adam, with early stopping. Deep ANNs are forbidden.
   * Overfitting management (Table 2) is baked into the default
     hyperparameters: L1/L2 regularization, early stopping, shallow trees /
     min_samples_leaf, kernel length-scale bounds, etc.
@@ -57,7 +57,7 @@ def _gpr_kernel() -> object:
 
 
 def _estimator_factories(seed: int) -> dict[str, Callable[[], object]]:
-    """Return name -> factory for the bare estimators (before scaling)."""
+    """Return name -> factory for the bare estimators."""
     factories: dict[str, Callable[[], object]] = {
         "linear_regression": lambda: LinearRegression(),
         "ridge": lambda: Ridge(alpha=1.0, random_state=seed),
@@ -111,7 +111,6 @@ def _estimator_factories(seed: int) -> dict[str, Callable[[], object]]:
         ),
     }
 
-    # Optional dependencies - keep the repo importable without them.
     try:
         from xgboost import XGBRegressor
 
@@ -173,20 +172,7 @@ def unwrap_pipeline(estimator):
 
 
 def build_model(name: str, seed: int = 42):
-    """Build the full pipeline ``StandardScaler -> estimator`` for one model.
-
-    Scaling inside the pipeline guarantees it is (re)fitted on the training
-    fold only during cross-validation -> no data leakage.
-
-    The ANN is additionally wrapped in a ``TransformedTargetRegressor`` that
-    standardizes ``y`` (fit on the training fold only, exactly like the
-    feature scaler). MLPRegressor is trained with gradient descent (Adam),
-    so on unscaled targets whose magnitude differs from the network's
-    default weight/activation scale (e.g. Temperature ~350, Hardness ~40-100)
-    it fails to converge even on the training data. Every other model here
-    is scale-invariant in y (closed-form linear solvers, tree splits, kernel
-    normalize_y) and does not need this.
-    """
+    """Build the full pipeline ``StandardScaler -> estimator`` for one model."""
     factories = _estimator_factories(seed)
     if name not in factories:
         raise KeyError(f"Unknown or unavailable model '{name}'. Available: {list(factories)}")
@@ -198,7 +184,6 @@ def build_model(name: str, seed: int = 42):
 
 # ---------------------------------------------------------------------------
 # Random Search spaces (Phase 4). Keys are pipeline-parameter names.
-# Grid Search is deliberately NOT provided (forbidden for small data).
 # ---------------------------------------------------------------------------
 SEARCH_SPACES: dict[str, dict] = {
     "linear_regression": {},  # baseline: no tuning

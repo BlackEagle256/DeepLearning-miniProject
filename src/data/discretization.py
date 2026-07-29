@@ -1,6 +1,6 @@
 """Phase 5 - Input discretization (Discrete Input datasets).
 
-The assignment requires converting the continuous input variables into
+The assignment asks to converting the continuous input variables into
 discrete integer values (1, 2, 3, ...) to build three new secondary
 datasets. Experimental inputs here take a small number of distinct set
 points (e.g. Plunging Speed in {25, 31.5, 40}), so the natural encoding
@@ -57,8 +57,6 @@ def build_discrete_dataset(name: str) -> pd.DataFrame:
     with open(out_dir / f"{name}_discrete_mapping.json", "w", encoding="utf-8") as f:
         json.dump(mappings, f, indent=2)
 
-    # Note: constant input columns were already removed by the loader for
-    # this dataset; ds_cfg still documents the full original input list.
     _ = ds_cfg
     return out
 

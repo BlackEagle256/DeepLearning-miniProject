@@ -1,4 +1,4 @@
-"""Pipeline 4 - convenience wrapper: multi-output, DISCRETE datasets, ALL 3 (Top-3 only).
+"""Pipeline 4: multi-output, DISCRETE datasets, ALL 3 (Top-3 only).
 
 The actual per-dataset deliverable is
 ``scripts/<dataset>/run_pipeline4_multi_discrete.py``.

@@ -1,13 +1,12 @@
 """Dataset loading utilities.
 
 Key rules encoded here (from the assignment):
-  * ``No.`` is only a sample index (extra column) and is always dropped.
   * ``Composite Volume Fraction (%)`` is binary (0/1). It is constant in
     Dataset_0136 (all 0) and Dataset_3772 (all 1); constant features carry
     no predictive information, must not show up as meaningful in feature
     importance, and are dropped to avoid numerical issues. It varies only
     in Dataset_0172, where it is kept.
-  * NO ROW IS EVER REMOVED. Outliers are only flagged/reported (EDA phase),
+  * NO ROW IS EVER REMOVED. Outliers are only flagged or reported in EDA phase,
     because in mechanics they may reflect true physical behaviour.
 """
 
@@ -54,7 +53,6 @@ def load_dataset(name: str, discrete: bool = False) -> DatasetBundle:
     """Load one dataset by config name (e.g. ``Dataset_0136``).
 
     Parameters
-    ----------
     name:
         Key inside the ``datasets`` section of ``configs/config.yaml``.
     discrete:

@@ -1,4 +1,4 @@
-"""Pipeline 1 - convenience wrapper: single-output regression, ALL 3 datasets.
+"""Pipeline 1: single-output regression, ALL 3 datasets.
 
 The assignment's actual per-dataset deliverable is the independent script
 under ``scripts/<dataset>/run_pipeline1_single_original.py``; this wrapper

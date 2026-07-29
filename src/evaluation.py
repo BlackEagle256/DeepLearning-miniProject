@@ -15,9 +15,12 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 from scipy import stats
+
 from sklearn.base import clone
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import KFold, learning_curve, validation_curve
+import scikit_posthocs as sp
+
 
 from src.config import load_config
 
@@ -29,8 +32,6 @@ from src.config import load_config
 #                    generalization gap = |train - test| distance,
 #                    fold stability    = std of test metric across folds.
 # ---------------------------------------------------------------------------
-
-
 def rmse(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     return float(np.sqrt(mean_squared_error(y_true, y_pred)))
 
@@ -60,13 +61,7 @@ def generalization_gap(train_metric: float, test_metric: float) -> float:
 
 
 def aggregate_fold_results(fold_df: pd.DataFrame, group_cols: list[str]) -> pd.DataFrame:
-    """Aggregate per-fold results.
-
-    ``fold_df`` must contain columns like ``train_r2 / test_r2 / ...`` plus
-    the grouping columns (e.g. model, target, seed). Returns mean and std of
-    every metric plus the R2 and RMSE generalization gaps and fold-stability
-    (std of test metrics), which feed the multi-criteria Top-3 selection.
-    """
+    """Aggregate per-fold results."""
     metric_cols = [c for c in fold_df.columns if c.startswith(("train_", "test_"))]
     agg = fold_df.groupby(group_cols)[metric_cols].agg(["mean", "std"])
     agg.columns = [f"{m}_{s}" for m, s in agg.columns]
@@ -83,16 +78,12 @@ def aggregate_fold_results(fold_df: pd.DataFrame, group_cols: list[str]) -> pd.D
 # ---------------------------------------------------------------------------
 # 2. Multi-criteria Top-3 model selection (Phase 5)
 #
-# Accuracy alone must NOT decide the best models. The composite score
-# combines (with config weights):
 #   * accuracy            : mean test R2 (higher better)
 #   * generalization gap  : |train R2 - test R2| (lower better)
 #   * fold stability      : std of test R2 across folds/seeds (lower better)
 #   * uncertainty         : mean PI width (lower better; optional column)
 #   * interpretability    : ordinal prior from the config (lower rank better)
 # ---------------------------------------------------------------------------
-
-
 def _minmax(s: pd.Series, higher_is_better: bool) -> pd.Series:
     """Normalize to [0, 1] where 1 is always 'better'."""
     rng = s.max() - s.min()
@@ -105,9 +96,9 @@ def select_top3(agg_df: pd.DataFrame, pi_width_col: str | None = None) -> pd.Dat
 
     ``agg_df`` must contain one row per model with columns:
       model, test_r2_mean, gap_r2, stability_test_r2_std
-    and optionally a PI-width column (``pi_width_col``).
-    Returns the frame sorted by composite score with a ``rank`` column;
-    take ``.head(3)`` for the Top-3.
+      and optionally a PI-width column (``pi_width_col``).
+      Returns the frame sorted by composite score with a ``rank`` column;
+      take ``.head(3)`` for the Top-3.
     """
     cfg = load_config()["top3_selection"]
     w = cfg["weights"]
@@ -134,15 +125,13 @@ def select_top3(agg_df: pd.DataFrame, pi_width_col: str | None = None) -> pd.Dat
 
 
 # ---------------------------------------------------------------------------
-# 3. Overfitting detection and monitoring (the core theme of the project)
+# 3. Overfitting detection and monitoring
 #
 # Tools:
 #   * learning curves      -> does more data close the train/test gap?
 #   * validation curves    -> complexity sweep for a chosen hyperparameter
 #   * gap report           -> tabulated Train/Test distance per model
 # ---------------------------------------------------------------------------
-
-
 def compute_learning_curve(estimator, X, y, seed: int = 42, n_points: int = 6) -> pd.DataFrame:
     """Learning curve with negative-RMSE scoring, CV per the global config."""
     cv = KFold(
@@ -229,8 +218,6 @@ def plot_learning_curve(curve_df: pd.DataFrame, title: str):
 # between Single-output and Multi-output modes - are statistically
 # significant.
 # ---------------------------------------------------------------------------
-
-
 def friedman_test(score_matrix: pd.DataFrame) -> dict[str, float]:
     """Friedman test.
 
@@ -245,7 +232,6 @@ def friedman_test(score_matrix: pd.DataFrame) -> dict[str, float]:
 
 def nemenyi_posthoc(score_matrix: pd.DataFrame) -> pd.DataFrame:
     """Nemenyi post-hoc pairwise p-values (requires scikit-posthocs)."""
-    import scikit_posthocs as sp
 
     return sp.posthoc_nemenyi_friedman(score_matrix.to_numpy())
 
@@ -272,8 +258,6 @@ def wilcoxon_pairwise(scores_a: pd.Series, scores_b: pd.Series) -> dict[str, flo
 # which feed both the Uncertainty comparison and the multi-criteria Top-3
 # selection ("which models provide more trustworthy uncertainty?").
 # ---------------------------------------------------------------------------
-
-
 def gpr_prediction_interval(
     fitted_pipeline,
     X: np.ndarray,
@@ -329,7 +313,7 @@ def bootstrap_prediction_interval(
 
 
 def interval_metrics(y_true: np.ndarray, lower: np.ndarray, upper: np.ndarray) -> dict[str, float]:
-    """Mean PI width and empirical coverage (fraction of truths inside the PI)."""
+    """Mean PI width and empirical coverage."""
     y_true = np.ravel(np.asarray(y_true))
     width = float(np.mean(upper - lower))
     coverage = float(np.mean((y_true >= lower) & (y_true <= upper)))

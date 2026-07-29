@@ -3,7 +3,7 @@
 For every (dataset, target, model, seed, fold) combination this module runs
 cross-validation and returns/loggs a tidy results table. Used with:
   * Original datasets  -> Pipeline 1
-  * Discrete datasets  -> Pipeline 3 (Top-3 models only)
+  * Discrete datasets  -> Pipeline 3 (for Top-3 models only)
 """
 
 from __future__ import annotations

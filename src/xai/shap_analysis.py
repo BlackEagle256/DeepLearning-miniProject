@@ -5,9 +5,6 @@ Interaction, Feature Importance. All functions save figures under
 ``results/xai/<dataset>/<model>/`` and return the SHAP values so that the
 scientific interpretation (effect sign, linearity, interactions, physical
 consistency with the friction process) can be written on top of them.
-
-NOTE: never report constant/dropped features as important - the loader
-already removes them before models see the data.
 """
 
 from __future__ import annotations
@@ -16,26 +13,17 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import shap
+import matplotlib.pyplot as plt
+
+
 
 from src.models.registry import unwrap_pipeline
 from src.utils.io import ensure_dir
 
 
 def _explainer_for(fitted_pipeline, X_background: pd.DataFrame):
-    """Choose the right SHAP explainer for the fitted pipeline.
-
-    Tree models -> TreeExplainer (exact, fast); everything else ->
-    model-agnostic Explainer on the pipeline's predict function.
-
-    Some XGBoost/SHAP version combinations fail inside TreeExplainer with
-    a ``ValueError`` while parsing the model's ``base_score`` (stored in
-    scientific notation, e.g. ``'[1.9E0]'``, by newer XGBoost releases).
-    This is a known cross-version incompatibility, not a data or pipeline
-    problem, so on failure we transparently fall back to the same
-    model-agnostic explainer used for non-tree models instead of crashing
-    the whole XAI run.
-    """
-    import shap
+    """Choose the right SHAP explainer for the fitted pipeline."""
 
     inner = unwrap_pipeline(fitted_pipeline)
     model = inner.named_steps["model"]
@@ -84,14 +72,11 @@ def generate_all_shap_plots(
     ``local_indices`` selects samples for the Local analysis (Waterfall);
     defaults to the first two rows.
     """
-    import matplotlib.pyplot as plt
-    import shap
 
     ensure_dir(out_dir)
     sv = compute_shap_values(fitted_pipeline, X)
     local_indices = local_indices or [0, 1]
 
-    # Global: summary / beeswarm / bar importance
     for plot_name, plot_fn in {
         "shap_summary": lambda: shap.summary_plot(sv, X, show=False),
         "shap_beeswarm": lambda: shap.plots.beeswarm(sv, show=False),
@@ -103,7 +88,6 @@ def generate_all_shap_plots(
         plt.savefig(out_dir / f"{plot_name}.png", dpi=150, bbox_inches="tight")
         plt.close("all")
 
-    # Global: dependence plot for every feature (shows non-linearity + interaction color)
     for feature in X.columns:
         plt.figure()
         shap.plots.scatter(sv[:, feature], color=sv, show=False)
@@ -112,7 +96,6 @@ def generate_all_shap_plots(
         plt.savefig(out_dir / f"shap_dependence_{safe}.png", dpi=150, bbox_inches="tight")
         plt.close("all")
 
-    # Local: waterfall for selected samples
     for idx in local_indices:
         plt.figure()
         shap.plots.waterfall(sv[idx], show=False)

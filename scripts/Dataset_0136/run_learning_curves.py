@@ -1,4 +1,4 @@
-"""Overfitting control - learning curves for Dataset_0136 only, Top-3 models."""
+"""Overfitting control - learning curves for Dataset_0136, Top-3 models."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))

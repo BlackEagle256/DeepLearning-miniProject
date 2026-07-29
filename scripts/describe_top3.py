@@ -1,4 +1,4 @@
-"""Detailed statistical review of the Top-3 models (cross-dataset report).
+"""Detailed statistical review of the Top-3 models.
 
 Runs pandas ``.describe()`` on the Top-3 models' fold-level results (every
 dataset, every target, every seed, every fold) and writes both the raw
@@ -6,9 +6,8 @@ describe() tables and a compact per-model/per-dataset summary, so the
 Top-3 models can be inspected in detail rather than just ranked by a single
 composite score.
 
-Prerequisite: Pipeline 1 must have been run for all three datasets first
-(this reads ``results/pipeline1/<dataset>/fold_results.csv``), and
-``scripts/select_top3.py`` must have produced ``results/top3_models.csv``.
+Prerequisite: Pipeline 1 must have been run for all three datasets first, 
+and ``scripts/select_top3.py`` must have produced ``results/top3_models.csv``.
 """
 
 import _bootstrap  # noqa: F401
@@ -16,7 +15,9 @@ import _bootstrap  # noqa: F401
 import pandas as pd
 
 from _pipeline_common import read_top3_models
+
 from src.config import get_path, load_config
+
 from src.utils.io import ensure_dir, save_table
 
 METRIC_COLS = [

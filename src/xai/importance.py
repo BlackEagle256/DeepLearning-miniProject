@@ -14,11 +14,13 @@ from sklearn.inspection import permutation_importance
 
 from src.models.registry import unwrap_pipeline
 
+from treeinterpreter import treeinterpreter as ti
+
 
 def compute_permutation_importance(
     fitted_pipeline, X: pd.DataFrame, y, seed: int = 42, n_repeats: int = 30
 ) -> pd.DataFrame:
-    """Permutation importance on the full pipeline (scaling included)."""
+    """Permutation importance on the full pipeline."""
     result = permutation_importance(
         fitted_pipeline,
         X.to_numpy(),
@@ -57,7 +59,6 @@ def treeinterpreter_contributions(fitted_pipeline, X: pd.DataFrame) -> pd.DataFr
 
     Works for RandomForest / ExtraTrees / DecisionTree regressors.
     """
-    from treeinterpreter import treeinterpreter as ti
 
     inner = unwrap_pipeline(fitted_pipeline)
     scaler = inner.named_steps["scaler"]

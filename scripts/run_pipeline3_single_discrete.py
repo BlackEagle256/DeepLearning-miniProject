@@ -1,4 +1,4 @@
-"""Pipeline 3 - convenience wrapper: single-output, DISCRETE datasets, ALL 3.
+"""Pipeline 3: single-output, DISCRETE datasets, ALL 3.
 
 Only the Top-3 models (multi-criteria selection from the Original runs) are
 executed, per the assignment ("to reduce runtime"). The actual per-dataset

@@ -3,13 +3,14 @@
 Methods (all three required): IQR rule, Local Outlier Factor,
 Isolation Forest. Outliers are ONLY flagged and reported - in mechanics
 they may reflect true physical behaviour, so no row is ever dropped
-without a mechanical justification (and none is dropped in this project).
+without a mechanical justification and none is dropped in this project.
 """
 
 from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+
 from sklearn.ensemble import IsolationForest
 from sklearn.neighbors import LocalOutlierFactor
 from sklearn.preprocessing import StandardScaler

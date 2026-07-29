@@ -1,5 +1,3 @@
-"""Make ``src`` importable when scripts are run from anywhere."""
-
 import sys
 import warnings
 from pathlib import Path

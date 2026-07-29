@@ -1,8 +1,7 @@
 """Shared library for the PER-DATASET pipeline scripts.
 
-The assignment appendix requires: "har dataset bayad pipeline jodagane
-dashte bashad (script-haye mostaghel)" - each dataset must have its own
-independent pipeline / standalone script. Concretely this means, for every
+The assignment appendix requires: " each dataset must have its own
+independent pipeline / standalone script. This means, for every
 phase (EDA, Pipeline 1-4, tuning, XAI, uncertainty, learning curves,
 statistical tests), Dataset_0136 / Dataset_0172 / Dataset_3772 each get
 their OWN runnable script under ``scripts/dataset_XXXX/``.
@@ -21,11 +20,43 @@ from __future__ import annotations
 import _bootstrap  # noqa: F401
 
 import pandas as pd
+import numpy as np
+from sklearn.model_selection import KFold
 
 from src.config import get_base_seed, get_path, load_config
+
 from src.data.loader import DatasetBundle, load_dataset
+from src.data.discretization import build_discrete_dataset
+
 from src.evaluation import aggregate_fold_results, select_top3
-from src.utils.io import save_table
+from src.evaluation import bootstrap_prediction_interval, gpr_prediction_interval, interval_metrics
+from src.evaluation import compute_learning_curve, plot_learning_curve
+from src.evaluation import friedman_test, nemenyi_posthoc, wilcoxon_pairwise
+
+from src.utils.io import save_table, save_figure
+
+from src.eda.outliers import outlier_report
+from src.eda.statistics import (
+        correlation_tests,
+        descriptive_statistics,
+        kendall_ci_table,
+        normality_tests,
+    )
+from src.eda.visualization import run_all_visualizations
+
+from src.models.registry import available_models, build_model
+from src.models.registry import SEARCH_SPACES
+
+
+from src.pipelines.cross_validation import nested_cv_score
+
+from src.tuning.hyperparameter import optuna_tune, random_search
+
+from src.xai.importance import compute_permutation_importance, tree_feature_importance
+from src.xai.interpretation import summarize_shap_interpretation
+from src.xai.lime_analysis import lime_explain_samples
+from src.xai.shap_analysis import compute_shap_values, generate_all_shap_plots
+
 
 # Level-A "dedicated analysis" outputs used by every post-Pipeline-1/2 phase
 # (tuning, XAI, uncertainty, learning curves, stat tests): the 5 outputs
@@ -48,17 +79,7 @@ def analysis_targets(bundle: DatasetBundle) -> list[str]:
 # ---------------------------------------------------------------------------
 # Phase 2 - EDA (one dataset)
 # ---------------------------------------------------------------------------
-
-
 def eda_for_dataset(dataset_name: str) -> None:
-    from src.eda.outliers import outlier_report
-    from src.eda.statistics import (
-        correlation_tests,
-        descriptive_statistics,
-        kendall_ci_table,
-        normality_tests,
-    )
-    from src.eda.visualization import run_all_visualizations
 
     bundle = load_dataset(dataset_name)
     full = pd.concat([bundle.X, bundle.Y], axis=1)
@@ -80,10 +101,7 @@ def eda_for_dataset(dataset_name: str) -> None:
 # ---------------------------------------------------------------------------
 # Phase 5 - Discretization (one dataset)
 # ---------------------------------------------------------------------------
-
-
 def discretize_dataset(dataset_name: str) -> None:
-    from src.data.discretization import build_discrete_dataset
 
     df = build_discrete_dataset(dataset_name)
     print(f"[discretization] {dataset_name}: saved {df.shape[0]} rows -> data/discrete/")
@@ -92,8 +110,6 @@ def discretize_dataset(dataset_name: str) -> None:
 # ---------------------------------------------------------------------------
 # Pipelines 1-4 (one dataset)
 # ---------------------------------------------------------------------------
-
-
 def run_pipeline_for_dataset(
     dataset_name: str,
     mode: str,
@@ -131,8 +147,6 @@ def run_pipeline_for_dataset(
 # results first). Lives here as a shared helper; the actual entry point is
 # the standalone scripts/select_top3.py.
 # ---------------------------------------------------------------------------
-
-
 def compute_top3_from_pipeline1() -> pd.DataFrame:
     """Read every dataset's Pipeline-1 per-dataset results and rank models."""
     cfg = load_config()
@@ -159,10 +173,7 @@ def run_pipeline_all_datasets(
     mode: str, discrete: bool, pipeline_id: int, models: list[str] | None = None
 ) -> pd.DataFrame:
     """Convenience-only orchestrator: loop ``run_pipeline_for_dataset`` over
-    every configured dataset. NOT the assignment's required deliverable by
-    itself (that's the per-dataset scripts under ``scripts/dataset_XXXX/``);
-    this just saves re-typing three commands when you want to run all three
-    at once (e.g. from the Makefile/tasks.ps1 ``all`` target)."""
+    every configured dataset."""
     cfg = load_config()
     aggs = [
         run_pipeline_for_dataset(name, mode, discrete, pipeline_id, models=models)
@@ -183,18 +194,11 @@ def read_top3_models() -> list[str]:
 
 # ---------------------------------------------------------------------------
 # Phase 4 - Hyperparameter tuning (one dataset)
-#   Stage 1: Random Search for EVERY model (assignment: "Random Search baraye
-#            hame model-ha").
+#   Stage 1: Random Search for EVERY model.
 #   Stage 2: Optuna Bayesian optimization + Nested-CV honest generalization
 #            check, Top-3 models only.
-#   Grid Search is forbidden and never implemented.
 # ---------------------------------------------------------------------------
-
-
 def tuning_for_dataset(dataset_name: str, top3: list[str]) -> None:
-    from src.models.registry import available_models, build_model
-    from src.pipelines.cross_validation import nested_cv_score
-    from src.tuning.hyperparameter import optuna_tune, random_search
 
     seed = get_base_seed()
     bundle = load_dataset(dataset_name)
@@ -203,7 +207,7 @@ def tuning_for_dataset(dataset_name: str, top3: list[str]) -> None:
 
     out_dir = get_path("results_dir") / "tuning" / dataset_name
 
-    # ---- Stage 1: Random Search, every model, every target ----
+    # Stage 1: Random Search, every model, every target
     stage1_rows = []
     for target in targets:
         y = bundle.Y[target]
@@ -221,8 +225,7 @@ def tuning_for_dataset(dataset_name: str, top3: list[str]) -> None:
             print(f"[tuning/random-search] {dataset_name} / {target} / {model_name} done")
     save_table(pd.DataFrame(stage1_rows), out_dir / "random_search_all_models.csv")
 
-    # ---- Stage 2: Optuna (Top-3 only) + Nested-CV honest generalization ----
-    from src.models.registry import SEARCH_SPACES
+    # Stage 2: Optuna (Top-3 only) + Nested-CV honest generalization
 
     stage2_rows = []
     for target in targets:
@@ -256,14 +259,7 @@ def tuning_for_dataset(dataset_name: str, top3: list[str]) -> None:
 # ---------------------------------------------------------------------------
 # Phase 6 - XAI (one dataset, Top-3 models)
 # ---------------------------------------------------------------------------
-
-
 def xai_for_dataset(dataset_name: str, top3: list[str]) -> None:
-    from src.models.registry import build_model
-    from src.xai.importance import compute_permutation_importance, tree_feature_importance
-    from src.xai.interpretation import summarize_shap_interpretation
-    from src.xai.lime_analysis import lime_explain_samples
-    from src.xai.shap_analysis import compute_shap_values, generate_all_shap_plots
 
     seed = get_base_seed()
     bundle = load_dataset(dataset_name)
@@ -308,21 +304,13 @@ def xai_for_dataset(dataset_name: str, top3: list[str]) -> None:
 # ---------------------------------------------------------------------------
 # Phase 7 - Uncertainty Quantification (one dataset)
 # ---------------------------------------------------------------------------
-
-
 def uncertainty_for_dataset(dataset_name: str, top3: list[str]) -> None:
     """Prediction intervals for EVERY model (assignment: GPR gets the analytical
-    PI, "sayer model-ha" - all OTHER models - get the Bootstrap PI; this is a
+    PI, all OTHER models - get the Bootstrap PI; this is a
     Section-2.1 general-model rule, not a Top-3-only rule like tuning/XAI/
-    learning-curves, whose reduced scope is explicitly authorized by Phase 5
-    "jahat kahesh hajm ejra". ``top3`` is kept only to flag those rows with
-    ``is_top3=True`` for convenient downstream filtering.
+    learning-curves, whose reduced scope is explicitly authorized by Phase 5.
+    ``top3`` is kept only to flag those rows with``is_top3=True`` for convenient downstream filtering.
     """
-    import numpy as np
-    from sklearn.model_selection import KFold
-
-    from src.evaluation import bootstrap_prediction_interval, gpr_prediction_interval, interval_metrics
-    from src.models.registry import available_models, build_model
 
     seed = get_base_seed()
     n_splits = load_config()["cross_validation"]["n_splits"]
@@ -367,12 +355,7 @@ def uncertainty_for_dataset(dataset_name: str, top3: list[str]) -> None:
 # ---------------------------------------------------------------------------
 # Overfitting control - learning curves (one dataset)
 # ---------------------------------------------------------------------------
-
-
 def learning_curves_for_dataset(dataset_name: str, top3: list[str]) -> None:
-    from src.evaluation import compute_learning_curve, plot_learning_curve
-    from src.models.registry import build_model
-    from src.utils.io import save_figure
 
     seed = get_base_seed()
     bundle = load_dataset(dataset_name)
@@ -395,17 +378,14 @@ def learning_curves_for_dataset(dataset_name: str, top3: list[str]) -> None:
 #   * Friedman + Nemenyi post-hoc across models (per-fold test RMSE).
 #   * Wilcoxon signed-rank: Single-output vs Multi-output, paired per target.
 # ---------------------------------------------------------------------------
-
-
 def stat_tests_for_dataset(dataset_name: str) -> None:
-    from src.evaluation import friedman_test, nemenyi_posthoc, wilcoxon_pairwise
 
     results_dir = get_path("results_dir")
     p1 = pd.read_csv(results_dir / "pipeline1" / dataset_name / "fold_results.csv")
     p2 = pd.read_csv(results_dir / "pipeline2" / dataset_name / "fold_results.csv")
     out_dir = results_dir / "statistical_tests" / dataset_name
 
-    # ---- Friedman + Nemenyi across models (single-output) ----
+    # Friedman + Nemenyi across models (single-output)
     matrix = p1.pivot_table(
         index=["target", "seed", "fold"], columns="model", values="test_rmse"
     ).dropna()
@@ -415,7 +395,7 @@ def stat_tests_for_dataset(dataset_name: str) -> None:
     nemenyi.index = nemenyi.columns = matrix.columns
     save_table(nemenyi, out_dir / "nemenyi.csv", index=True)
 
-    # ---- Wilcoxon: Single vs Multi output, paired PER TARGET/seed/fold ----
+    # Wilcoxon: Single vs Multi output, paired PER TARGET/seed/fold
     # (see module docstring in the original stats script for why the
     # comparison must use per-target RMSE columns, not the raw aggregate).
     per_target_cols = [c for c in p2.columns if c.startswith("test_") and c.endswith("__rmse")]

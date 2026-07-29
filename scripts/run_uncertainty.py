@@ -1,4 +1,4 @@
-"""Phase 7 - convenience wrapper: Uncertainty Quantification, ALL 3 datasets.
+"""Phase 7: Uncertainty Quantification, ALL 3 datasets.
 
 For every dataset / Level-A target: GPR gets the analytical Prediction
 Interval, the Top-3 models get the Bootstrap Prediction Interval.

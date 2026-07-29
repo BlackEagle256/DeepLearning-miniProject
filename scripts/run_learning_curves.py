@@ -1,4 +1,4 @@
-"""Overfitting control - convenience wrapper: learning curves, ALL 3 datasets.
+"""Overfitting control: learning curves, ALL 3 datasets.
 
 The actual per-dataset deliverable is
 ``scripts/<dataset>/run_learning_curves.py``.

@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 
 from src.utils.io import ensure_dir
+from lime.lime_tabular import LimeTabularExplainer
 
 
 def lime_explain_samples(
@@ -18,7 +19,6 @@ def lime_explain_samples(
     num_features: int | None = None,
 ) -> list:
     """Generate LIME explanations (figure + text) for selected samples."""
-    from lime.lime_tabular import LimeTabularExplainer
 
     ensure_dir(out_dir)
     sample_indices = sample_indices or [0, 1]

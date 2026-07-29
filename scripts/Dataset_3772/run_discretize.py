@@ -1,4 +1,4 @@
-"""Phase 5 - build the Discrete-Input version of Dataset_3772 only."""
+"""Phase 5 - build the Discrete-Input version of Dataset_3772."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))

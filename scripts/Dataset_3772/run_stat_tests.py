@@ -1,4 +1,4 @@
-"""Phase 7 - statistical comparisons for Dataset_3772 only.
+"""Phase 7 - statistical comparisons for Dataset_3772.
 
 1. Friedman test + Nemenyi post-hoc across models (per-fold test RMSE).
 2. Wilcoxon signed-rank: Single-output vs Multi-output, paired per target.

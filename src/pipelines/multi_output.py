@@ -1,8 +1,7 @@
 """Multi-output regression pipeline (Pipelines 2 and 4).
 
 All Level-A outputs of a dataset are predicted jointly. Estimators without
-native multi-output support are wrapped in ``MultiOutputRegressor``
-(one internal regressor per target, but trained/evaluated as one model).
+native multi-output support are wrapped in ``MultiOutputRegressor``.
 """
 
 from __future__ import annotations
@@ -38,12 +37,7 @@ def run_multi_output(
     experiment_name: str | None = None,
     log_to_mlflow: bool = True,
 ) -> pd.DataFrame:
-    """Run multi-output CV for one dataset (metrics averaged over outputs).
-
-    Note: sklearn's default multi-output R2/MAE are uniform averages across
-    targets; per-target breakdowns for the Single-vs-Multi comparison
-    (Phase 7) can be added by predicting per fold and splitting columns.
-    """
+    """Run multi-output CV for one dataset (metrics averaged over outputs)."""
     cfg = load_config()
     seeds = cfg["reproducibility"]["seeds"]
     requested = models if models is not None else cfg["models"]

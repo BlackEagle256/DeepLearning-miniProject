@@ -1,6 +1,6 @@
 """Cross-validation engine shared by all four project pipelines.
 
-Protocol (per assignment):
+Protocol:
   * k-Fold (k=5) as the main framework, LOOCV available as an option.
   * Every experiment repeated over 5 different random seeds (small-data
     results are seed-sensitive).
@@ -15,7 +15,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 from sklearn.base import clone
-from sklearn.model_selection import KFold, LeaveOneOut
+from sklearn.model_selection import KFold, LeaveOneOut, RandomizedSearchCV
 
 from src.config import load_config
 from src.evaluation import compute_metrics
@@ -37,7 +37,7 @@ def cross_validate_model(
 ) -> pd.DataFrame:
     """Run one CV round for one (estimator, seed) pair.
 
-    Works for both single-output (Series) and multi-output (DataFrame) ``y``.
+    Works for both single-output and multi-output ``y``.
     For LOOCV single test points, per-fold R2/NRMSE are undefined; use k-fold
     for per-fold statistics or aggregate LOOCV predictions externally.
 
@@ -81,7 +81,6 @@ def cross_validate_multi_seed(
     y: pd.DataFrame | pd.Series,
     seeds: list[int] | None = None,
 ) -> pd.DataFrame:
-    """Repeat cross-validation over all configured seeds and stack results."""
     seeds = seeds if seeds is not None else load_config()["reproducibility"]["seeds"]
     return pd.concat(
         [cross_validate_model(estimator, X, y, seed=s) for s in seeds],
@@ -92,10 +91,9 @@ def cross_validate_multi_seed(
 def nested_cv_score(estimator, param_distributions: dict, X, y, seed: int) -> pd.DataFrame:
     """Nested CV (outer evaluation, inner Random-Search tuning).
 
-    Used as an honest generalization estimate for tuned models (Table 2:
-    Nested CV is part of the global evaluation framework).
+    Used as an honest generalization estimate for tuned models (Table 2):
+    Nested CV is part of the global evaluation framework.
     """
-    from sklearn.model_selection import RandomizedSearchCV
 
     cfg = load_config()
     nested_cfg = cfg["cross_validation"]["nested"]

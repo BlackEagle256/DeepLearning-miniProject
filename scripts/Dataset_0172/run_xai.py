@@ -1,4 +1,4 @@
-"""Phase 6 - XAI (SHAP + LIME + importances + interpretation) for Dataset_0172 only, Top-3 models."""
+"""Phase 6 - XAI (SHAP + LIME + importances + interpretation) for Dataset_0172, Top-3 models."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))

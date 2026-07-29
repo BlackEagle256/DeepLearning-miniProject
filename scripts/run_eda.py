@@ -3,8 +3,7 @@
 The assignment's actual per-dataset deliverable is the independent script
 under ``scripts/<dataset>/run_eda.py`` (and the matching notebook under
 ``notebooks/``). This wrapper just loops over them so `make eda` /
-`tasks.ps1 eda` can regenerate everything in one command; it adds no logic
-of its own.
+`tasks.ps1 eda` can regenerate everything in one command; it adds no logic of its own.
 
 Usage:
     python scripts/run_eda.py --all

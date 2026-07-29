@@ -1,21 +1,22 @@
 """Phase 4 - Hyperparameter optimization.
 
-Policy (from the assignment):
+Policy:
   * Random Search for ALL models.
   * Bayesian Optimization (Optuna) ONLY for the Top-3 models, after the
     first stage.
-  * Grid Search is FORBIDDEN (dataset is too small) - deliberately not
-    implemented here.
+  * Grid Search is FORBIDDEN because datasets are too small.
 """
 
 from __future__ import annotations
 
 import numpy as np
+import optuna
 from sklearn.base import clone
-from sklearn.model_selection import KFold, RandomizedSearchCV
+from sklearn.model_selection import KFold, RandomizedSearchCV, cross_val_score
 
 from src.config import load_config
 from src.models.registry import SEARCH_SPACES, build_model
+
 
 
 def random_search(model_name: str, X, y, seed: int = 42) -> RandomizedSearchCV:
@@ -44,8 +45,6 @@ def optuna_tune(model_name: str, X, y, seed: int = 42, n_trials: int | None = No
     Returns the Optuna study; ``study.best_params`` holds the winning
     pipeline parameters (same naming as the Random-Search space).
     """
-    import optuna
-    from sklearn.model_selection import cross_val_score
 
     cfg = load_config()
     n_trials = n_trials or cfg["tuning"]["optuna_trials"]

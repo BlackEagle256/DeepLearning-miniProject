@@ -1,10 +1,9 @@
-"""Phase 4 - convenience wrapper: hyperparameter optimization, ALL 3 datasets.
+"""Phase 4: hyperparameter optimization, ALL 3 datasets.
 
 Stage 1: Random Search for EVERY model (assignment requirement - not just
          the Top-3), per dataset per target.
 Stage 2: Optuna Bayesian optimization + Nested-CV honest generalization
          check, Top-3 models only.
-Grid Search is forbidden (small data) and intentionally unavailable.
 
 The actual per-dataset deliverable is ``scripts/<dataset>/run_tuning.py``.
 Results land under ``results/tuning/<dataset>/`` and are also logged where

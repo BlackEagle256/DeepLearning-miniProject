@@ -1,4 +1,4 @@
-"""Phase 5 - convenience wrapper: build all three Discrete-Input datasets.
+"""Phase 5: build all three Discrete-Input datasets.
 
 The actual per-dataset deliverable is
 ``scripts/<dataset>/run_discretize.py``.

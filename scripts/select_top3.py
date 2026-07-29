@@ -1,7 +1,7 @@
 """Multi-criteria Top-3 model selection.
 
 This is the ONE legitimately cross-dataset step in the whole project: the
-assignment says to run every model on the Original datasets, THEN pick one
+assignment asks to run every model on the Original datasets, THEN pick one
 Top-3 list and reuse it everywhere else (discrete datasets, tuning, XAI,
 uncertainty) "to reduce run volume and simulation cost". That selection
 needs all three datasets' Pipeline-1 results, so unlike every other phase it

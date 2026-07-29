@@ -2,11 +2,10 @@
 
 Every experiment (parameters, per-seed metrics, aggregated metrics and
 artifact tables) is logged to a local SQLite-backed MLflow tracking store
-(``mlflow.db`` at the repo root). Launch the UI with:
+(``mlflow.db`` at the repo root). 
+    we can launch the mlflow UI with:
 
     mlflow ui --backend-store-uri sqlite:///mlflow.db
-
-(and take the screenshots required for the final report).
 """
 
 from __future__ import annotations
@@ -16,6 +15,11 @@ import tempfile
 from pathlib import Path
 
 import pandas as pd
+import mlflow
+
+
+from src.config import PROJECT_ROOT
+
 
 _INVALID_METRIC_CHARS = re.compile(r"[^a-zA-Z0-9_\-. /]")
 
@@ -23,26 +27,14 @@ _INVALID_METRIC_CHARS = re.compile(r"[^a-zA-Z0-9_\-. /]")
 def _sanitize_metric_name(name: str) -> str:
     return _INVALID_METRIC_CHARS.sub("_", name)
 
-from src.config import PROJECT_ROOT
-
 try:
-    import mlflow
-
     _MLFLOW_AVAILABLE = True
 except ImportError:  # pragma: no cover - keep repo importable without mlflow
     _MLFLOW_AVAILABLE = False
 
 
 def _setup(experiment_name: str) -> bool:
-    """Point MLflow at the local store and select/create the experiment.
-
-    Recent MLflow versions (2.2x+) put the plain folder-based file store
-    ("./mlruns") into maintenance mode and refuse to start unless
-    MLFLOW_ALLOW_FILE_STORE=true is set. To avoid that entirely, tracking
-    uses a local SQLite database (mlflow.db at the repo root) as the
-    backend store. This works out of the box on Windows, macOS and Linux
-    with no extra environment variables.
-    """
+    """Point MLflow at the local store and select/create the experiment."""
     if not _MLFLOW_AVAILABLE:
         print("[mlflow] mlflow not installed - skipping tracking.")
         return False

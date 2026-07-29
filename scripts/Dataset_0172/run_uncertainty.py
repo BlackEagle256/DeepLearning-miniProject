@@ -1,4 +1,4 @@
-"""Phase 7 - Uncertainty Quantification (GPR PI + Bootstrap PI) for Dataset_0172 only."""
+"""Phase 7 - Uncertainty Quantification (GPR PI + Bootstrap PI) for Dataset_0172."""
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))

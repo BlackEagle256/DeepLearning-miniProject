@@ -1,11 +1,9 @@
 """Phase 6 - automated scientific-interpretation summary.
 
-The assignment is explicit: "faghat nabayad shekl rasm shavad balke bayad
-tozih dahad" - plots alone are not enough, the report must say (per model /
-target): which input has the strongest effect, whether that effect is
+The assignment is explicit: plots alone are not enough, the report must say 
+(per model /target): which input has the strongest effect, whether that effect is
 positive or negative, whether it is linear or non-linear, whether inputs
-interact, and whether the result is physically plausible for a friction
-process.
+interact, and whether the result is physically plausible for a friction process.
 
 This module turns the already-computed SHAP values into that written
 summary automatically, from the numbers themselves:
@@ -20,12 +18,6 @@ summary automatically, from the numbers themselves:
   * interaction         -> for tree models, mean off-diagonal SHAP
                           interaction magnitude relative to the mean
                           main-effect magnitude
-
-This is a best-effort NUMERICAL summary, not a substitute for a mechanical
-engineer's judgement - the "physically plausible?" column is only a flag
-(large unexplained sign flips / extreme non-monotonicity) meant to be
-checked against friction-process physics by a human before it goes in the
-final report.
 """
 
 from __future__ import annotations
@@ -91,9 +83,6 @@ def summarize_shap_interpretation(
     summary = pd.DataFrame(rows).sort_values("mean_abs_shap", ascending=False).reset_index(drop=True)
     summary.insert(0, "rank", summary.index + 1)
 
-    # Interaction strength: mean |off-diagonal| relative to mean |diagonal|
-    # main effect, from the same tree-interaction matrix the plot function
-    # computes (silently skipped for non-tree models -> "n/a").
     interaction_strength = _interaction_strength_ratio(shap_values, values, feature_names)
     summary["interaction_strength_ratio"] = interaction_strength
 
@@ -105,16 +94,11 @@ def _interaction_strength_ratio(shap_values, values: np.ndarray, feature_names: 
 
     >0.3 is reported as "notable interaction between inputs"; only
     meaningful for tree models (TreeExplainer), so non-tree models get
-    ``"n/a"`` (interaction values require the exact tree-based explainer).
+    ``"n/a"``.
     """
     base_values = getattr(shap_values, "base_values", None)
     _ = base_values  # not needed; kept for readability of what's available
-    # We can't recompute the interaction matrix here without refitting a
-    # TreeExplainer (only available for tree models); the caller already
-    # tries that in generate_all_shap_plots. Re-deriving a cheap proxy
-    # instead: correlation between the SHAP value residual and pairwise
-    # feature products acts as a lightweight interaction proxy that works
-    # for every model type.
+
     n_features = values.shape[1]
     if n_features < 2:
         return "n/a"

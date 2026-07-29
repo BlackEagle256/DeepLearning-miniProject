@@ -13,12 +13,6 @@ import numpy as np
 
 
 def set_global_seed(seed: int) -> None:
-    """Seed Python, NumPy and hash-based operations.
-
-    Individual estimators additionally receive ``random_state=seed``
-    through the model registry, so sklearn / XGBoost / LightGBM runs
-    are deterministic as well.
-    """
     random.seed(seed)
     np.random.seed(seed)
     os.environ["PYTHONHASHSEED"] = str(seed)
