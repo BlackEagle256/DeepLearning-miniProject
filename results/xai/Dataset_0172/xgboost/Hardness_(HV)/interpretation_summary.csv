@@ -1,0 +1,5 @@
+rank,dataset,model,target,feature,mean_abs_shap,effect_sign,pearson_r_feature_vs_shap,spearman_rho_feature_vs_shap,linearity,interaction_strength_ratio
+1,Dataset_0172,xgboost,Hardness (HV),Rotational Speed,4.045489523145886,positive,0.9616298973806647,0.9677414977032727,approximately linear,0.003303365191648396
+2,Dataset_0172,xgboost,Hardness (HV),Composite Volume Fraction (%),2.5626791848076707,positive,0.9989488214063647,0.8661089445557502,approximately linear,0.003303365191648396
+3,Dataset_0172,xgboost,Hardness (HV),Tool Shape,2.242679313377101,positive,0.9750731679380732,0.9428999892542551,approximately linear,0.003303365191648396
+4,Dataset_0172,xgboost,Hardness (HV),Plunging Speed,1.9624389773043107,negative,-0.9870558406324137,-0.9428999892542551,approximately linear,0.003303365191648396

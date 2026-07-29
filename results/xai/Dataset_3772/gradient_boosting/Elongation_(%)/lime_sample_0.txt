@@ -1,0 +1,3 @@
+Plunging Speed <= 25.00: -1.4947
+Rotational Speed <= 453.75: -0.8499
+Tool Shape <= 1.00: -0.5685

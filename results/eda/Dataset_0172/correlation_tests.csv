@@ -1,0 +1,37 @@
+var_a,var_b,pearson_r,pearson_p,spearman_rho,spearman_p,kendall_tau,kendall_p
+Tool Shape,Rotational Speed,0.0,1.0,0.0,1.0,0.0,1.0
+Tool Shape,Plunging Speed,-0.0,1.0,0.0,1.0,0.0,1.0
+Tool Shape,Composite Volume Fraction (%),0.0,1.0,0.0,1.0,0.0,1.0
+Tool Shape,Si Particle Size (um),-0.1726,0.147,-0.1564,0.1896,-0.1239,0.1806
+Tool Shape,Hardness (HV),0.4022,0.0005,0.3871,0.0008,0.307,0.001
+Tool Shape,wear rate,-0.1878,0.1142,-0.1793,0.1319,-0.1372,0.1366
+Tool Shape,Ultimate Compression Strength (MPa),0.3472,0.0028,0.3397,0.0035,0.2727,0.0032
+Tool Shape,Elongation (%),0.1933,0.1037,0.1859,0.1179,0.1457,0.1171
+Rotational Speed,Plunging Speed,-0.0,1.0,0.0,1.0,0.0,1.0
+Rotational Speed,Composite Volume Fraction (%),0.0,1.0,0.0,1.0,0.0,1.0
+Rotational Speed,Si Particle Size (um),-0.4712,0.0,-0.4628,0.0,-0.3897,0.0
+Rotational Speed,Hardness (HV),0.6683,0.0,0.689,0.0,0.5402,0.0
+Rotational Speed,wear rate,-0.4345,0.0001,-0.4253,0.0002,-0.336,0.0002
+Rotational Speed,Ultimate Compression Strength (MPa),-0.3324,0.0043,-0.3471,0.0028,-0.2531,0.0047
+Rotational Speed,Elongation (%),-0.2631,0.0256,-0.3302,0.0046,-0.2385,0.0081
+Plunging Speed,Composite Volume Fraction (%),0.0,1.0,0.0,1.0,0.0,1.0
+Plunging Speed,Si Particle Size (um),0.1679,0.1586,0.1556,0.192,0.1215,0.1892
+Plunging Speed,Hardness (HV),-0.3794,0.001,-0.3757,0.0011,-0.2954,0.0015
+Plunging Speed,wear rate,0.282,0.0164,0.2587,0.0282,0.2039,0.027
+Plunging Speed,Ultimate Compression Strength (MPa),0.5573,0.0,0.5612,0.0,0.4489,0.0
+Plunging Speed,Elongation (%),0.3105,0.0079,0.2633,0.0254,0.2092,0.0245
+Composite Volume Fraction (%),Si Particle Size (um),-0.7672,0.0,-0.8536,0.0,-0.7055,0.0
+Composite Volume Fraction (%),Hardness (HV),0.4169,0.0003,0.3927,0.0006,0.3272,0.0009
+Composite Volume Fraction (%),wear rate,-0.8142,0.0,-0.8381,0.0,-0.6898,0.0
+Composite Volume Fraction (%),Ultimate Compression Strength (MPa),0.504,0.0,0.4913,0.0,0.4053,0.0
+Composite Volume Fraction (%),Elongation (%),0.3548,0.0022,0.3444,0.003,0.2859,0.0037
+Si Particle Size (um),Hardness (HV),-0.7933,0.0,-0.7877,0.0,-0.6501,0.0
+Si Particle Size (um),wear rate,0.9556,0.0,0.9868,0.0,0.9153,0.0
+Si Particle Size (um),Ultimate Compression Strength (MPa),-0.2014,0.0897,-0.2166,0.0676,-0.1291,0.1117
+Si Particle Size (um),Elongation (%),-0.1401,0.2406,-0.1119,0.3495,-0.0708,0.3862
+Hardness (HV),wear rate,-0.834,0.0,-0.8096,0.0,-0.6707,0.0
+Hardness (HV),Ultimate Compression Strength (MPa),-0.1005,0.4007,-0.1499,0.2088,-0.0956,0.2426
+Hardness (HV),Elongation (%),-0.0954,0.4256,-0.1439,0.2279,-0.0846,0.3039
+wear rate,Ultimate Compression Strength (MPa),-0.1887,0.1124,-0.1818,0.1264,-0.1065,0.1876
+wear rate,Elongation (%),-0.1549,0.1939,-0.111,0.3531,-0.0677,0.4053
+Ultimate Compression Strength (MPa),Elongation (%),0.7393,0.0,0.7134,0.0,0.5437,0.0

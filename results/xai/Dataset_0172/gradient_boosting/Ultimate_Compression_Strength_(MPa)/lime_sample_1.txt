@@ -1,0 +1,4 @@
+Composite Volume Fraction (%) <= 0.00: -18.7162
+Tool Shape <= 1.00: -12.9144
+25.00 < Plunging Speed <= 31.50: +7.1836
+Rotational Speed <= 453.75: +3.8873

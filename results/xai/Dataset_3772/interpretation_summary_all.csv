@@ -1,0 +1,46 @@
+rank,dataset,model,target,feature,mean_abs_shap,effect_sign,pearson_r_feature_vs_shap,spearman_rho_feature_vs_shap,linearity,interaction_strength_ratio
+1,Dataset_3772,xgboost,Si Particle Size (um),Rotational Speed,0.17405999741620484,negative,-0.9646970867924526,-0.9686196045011367,approximately linear,0.007182939136180566
+2,Dataset_3772,xgboost,Si Particle Size (um),Tool Shape,0.05258883508267224,negative,-0.9605252080363574,-0.943172990270231,approximately linear,0.007182939136180566
+3,Dataset_3772,xgboost,Si Particle Size (um),Plunging Speed,0.04914943110427737,positive,0.983118618269899,0.943172990270231,approximately linear,0.007182939136180566
+1,Dataset_3772,lightgbm,Si Particle Size (um),Rotational Speed,0.17093938410863757,negative,-0.9625617459567449,-0.963836297812242,approximately linear,0.01012757831661451
+2,Dataset_3772,lightgbm,Si Particle Size (um),Tool Shape,0.04963635389520596,negative,-0.957919113545985,-0.9460998335825321,approximately linear,0.01012757831661451
+3,Dataset_3772,lightgbm,Si Particle Size (um),Plunging Speed,0.045861543595160016,positive,0.9672789354262794,0.9460998335825321,approximately linear,0.01012757831661451
+1,Dataset_3772,gradient_boosting,Si Particle Size (um),Rotational Speed,0.17602329556551435,negative,-0.9663558112101265,-0.9686196045011367,approximately linear,0.01422264128753712
+2,Dataset_3772,gradient_boosting,Si Particle Size (um),Tool Shape,0.05395109224400621,negative,-0.9650052564512133,-0.943172990270231,approximately linear,0.01422264128753712
+3,Dataset_3772,gradient_boosting,Si Particle Size (um),Plunging Speed,0.049629933835400444,positive,0.978837325479093,0.943172990270231,approximately linear,0.01422264128753712
+1,Dataset_3772,xgboost,Hardness (HV),Rotational Speed,4.085968653361,positive,0.9485125943087227,0.9447030710566642,approximately linear,0.00981134118189174
+2,Dataset_3772,xgboost,Hardness (HV),Tool Shape,2.3429588035300917,positive,0.9514651265229298,0.943172990270231,approximately linear,0.00981134118189174
+3,Dataset_3772,xgboost,Hardness (HV),Plunging Speed,1.93209339659891,negative,-0.982229407320893,-0.943172990270231,approximately linear,0.00981134118189174
+1,Dataset_3772,lightgbm,Hardness (HV),Rotational Speed,4.0849178358056175,positive,0.9504473647652748,0.9470947244011113,approximately linear,0.0048028861977048205
+2,Dataset_3772,lightgbm,Hardness (HV),Tool Shape,2.325419818105994,positive,0.9581132286754139,0.9460998335825321,approximately linear,0.0048028861977048205
+3,Dataset_3772,lightgbm,Hardness (HV),Plunging Speed,1.8845905247101529,negative,-0.9889034464756552,-0.9460998335825321,approximately linear,0.0048028861977048205
+1,Dataset_3772,gradient_boosting,Hardness (HV),Rotational Speed,3.703818806539423,positive,0.9562166356398797,0.9614446444677949,approximately linear,0.015323291040740731
+2,Dataset_3772,gradient_boosting,Hardness (HV),Tool Shape,2.2924688622696348,positive,0.9298414920194864,0.933348271621583,approximately linear,0.015323291040740731
+3,Dataset_3772,gradient_boosting,Hardness (HV),Plunging Speed,1.904909579528783,negative,-0.981661995159,-0.943172990270231,approximately linear,0.015323291040740731
+1,Dataset_3772,xgboost,wear rate,Rotational Speed,0.4926010767618814,negative,-0.9716040887516616,-0.9686196045011367,approximately linear,0.00513027819859719
+2,Dataset_3772,xgboost,wear rate,Plunging Speed,0.28637262332586594,positive,0.9924718466346362,0.943172990270231,approximately linear,0.00513027819859719
+3,Dataset_3772,xgboost,wear rate,Tool Shape,0.20425711774531718,negative,-0.9838146246324151,-0.943172990270231,approximately linear,0.00513027819859719
+1,Dataset_3772,lightgbm,wear rate,Rotational Speed,0.4876090846537033,negative,-0.9700945660584078,-0.9686196045011367,approximately linear,0.0034219846352844872
+2,Dataset_3772,lightgbm,wear rate,Plunging Speed,0.28329865341373167,positive,0.9925592401039369,0.9460998335825321,approximately linear,0.0034219846352844872
+3,Dataset_3772,lightgbm,wear rate,Tool Shape,0.19799550221223777,negative,-0.9890936367215586,-0.9460998335825321,approximately linear,0.0034219846352844872
+1,Dataset_3772,gradient_boosting,wear rate,Rotational Speed,0.4861284549873079,negative,-0.9690416389599411,-0.9686196045011367,approximately linear,0.01126470163857119
+2,Dataset_3772,gradient_boosting,wear rate,Plunging Speed,0.28969131583171936,positive,0.9925275616583228,0.943172990270231,approximately linear,0.01126470163857119
+3,Dataset_3772,gradient_boosting,wear rate,Tool Shape,0.17556656979466592,negative,-0.9788302037617996,-0.943172990270231,approximately linear,0.01126470163857119
+1,Dataset_3772,xgboost,Ultimate Compression Strength (MPa),Plunging Speed,10.351227654351124,positive,0.9359439958012383,0.943172990270231,approximately linear,0.020612143098371852
+2,Dataset_3772,xgboost,Ultimate Compression Strength (MPa),Rotational Speed,6.9752110787379875,negative,-0.740221982763159,-0.7509791501564369,approximately linear,0.020612143098371852
+3,Dataset_3772,xgboost,Ultimate Compression Strength (MPa),Tool Shape,6.458397335476347,positive,0.9527146275825549,0.943172990270231,approximately linear,0.020612143098371852
+1,Dataset_3772,lightgbm,Ultimate Compression Strength (MPa),Plunging Speed,10.305730353826522,positive,0.9386292597253363,0.9460998335825321,approximately linear,0.01884361854915136
+2,Dataset_3772,lightgbm,Ultimate Compression Strength (MPa),Rotational Speed,7.0637969613182445,negative,-0.7283653541101467,-0.7270626167119643,approximately linear,0.01884361854915136
+3,Dataset_3772,lightgbm,Ultimate Compression Strength (MPa),Tool Shape,6.559892369886167,positive,0.9674397183148455,0.9460998335825321,approximately linear,0.01884361854915136
+1,Dataset_3772,gradient_boosting,Ultimate Compression Strength (MPa),Plunging Speed,9.599635566903956,positive,0.963044611782531,0.943172990270231,approximately linear,0.020886315470198636
+2,Dataset_3772,gradient_boosting,Ultimate Compression Strength (MPa),Tool Shape,6.388331349265815,positive,0.975657117906307,0.943172990270231,approximately linear,0.020886315470198636
+3,Dataset_3772,gradient_boosting,Ultimate Compression Strength (MPa),Rotational Speed,5.909379943473841,negative,-0.6643326936465024,-0.6553130163785468,approximately linear,0.020886315470198636
+1,Dataset_3772,xgboost,Elongation (%),Rotational Speed,1.8795574108759563,negative,-0.37809979149155565,-0.44006421537829415,approximately linear,0.08110473068923908
+2,Dataset_3772,xgboost,Elongation (%),Plunging Speed,1.225109759181615,positive,0.8302948508433493,0.7958022105405076,approximately linear,0.08110473068923908
+3,Dataset_3772,xgboost,Elongation (%),Tool Shape,0.572122202979194,positive,0.8852411363907796,0.890774490810774,approximately linear,0.08110473068923908
+1,Dataset_3772,lightgbm,Elongation (%),Rotational Speed,1.9175544297114382,negative,-0.37118762539382255,-0.39462280183379644,approximately linear,0.07743073204124772
+2,Dataset_3772,lightgbm,Elongation (%),Plunging Speed,1.2412600717922113,positive,0.801395926185026,0.7391404949863533,approximately linear,0.07743073204124772
+3,Dataset_3772,lightgbm,Elongation (%),Tool Shape,0.5765495366252913,positive,0.9446748209180889,0.9460998335825321,approximately linear,0.07743073204124772
+1,Dataset_3772,gradient_boosting,Elongation (%),Rotational Speed,1.1006929978056799,negative,-0.2597708427884939,-0.2152488010002526,approximately linear,0.031979252541663894
+2,Dataset_3772,gradient_boosting,Elongation (%),Plunging Speed,1.0809443986172782,positive,0.919538885507853,0.858025428648613,approximately linear,0.031979252541663894
+3,Dataset_3772,gradient_boosting,Elongation (%),Tool Shape,0.3472200315614968,positive,0.938048318369205,0.933348271621583,approximately linear,0.031979252541663894

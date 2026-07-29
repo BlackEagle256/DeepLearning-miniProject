@@ -1,0 +1,11 @@
+variable,shapiro_stat,shapiro_p,anderson_stat,anderson_crit_5pct,ks_stat,ks_p,normal_at_5pct(shapiro)
+Tool Shape,0.7945,0.0,2.8596,0.721,0.2197,0.0525,False
+Rotational Speed,0.8617,0.0004,1.6647,0.721,0.1643,0.2564,False
+Plunging Speed,0.7899,0.0,2.9571,0.721,0.2291,0.0384,False
+Si Particle Size (um),0.9444,0.0698,0.5852,0.721,0.1441,0.4051,True
+Hardness (HV),0.9793,0.7214,0.211,0.721,0.0854,0.9353,True
+wear rate,0.9687,0.39,0.2916,0.721,0.0753,0.9772,True
+Ultimate Compression Strength (MPa),0.9792,0.7181,0.1949,0.721,0.0664,0.9942,True
+Elongation (%),0.9704,0.4366,0.31,0.721,0.1203,0.6316,True
+Temperature (°C),0.9657,0.3204,0.4342,0.721,0.1212,0.6225,True
+Strain,0.9581,0.1881,0.4567,0.721,0.1201,0.6333,True

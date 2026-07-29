@@ -1,0 +1,3 @@
+Rotational Speed <= 453.75: +1.4752
+Tool Shape <= 1.00: +0.5035
+25.00 < Plunging Speed <= 31.50: -0.0790

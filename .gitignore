@@ -11,7 +11,7 @@ mlruns/
 mlartifacts/
 
 # Generated results (figures, tables) - regenerate via scripts
-results/*
+# results/*
 !results/.gitkeep
 
 # OS

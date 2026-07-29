@@ -1,0 +1,4 @@
+rank,dataset,model,target,feature,mean_abs_shap,effect_sign,pearson_r_feature_vs_shap,spearman_rho_feature_vs_shap,linearity,interaction_strength_ratio
+1,Dataset_3772,gradient_boosting,Si Particle Size (um),Rotational Speed,0.17602329556551435,negative,-0.9663558112101265,-0.9686196045011367,approximately linear,0.01422264128753712
+2,Dataset_3772,gradient_boosting,Si Particle Size (um),Tool Shape,0.05395109224400621,negative,-0.9650052564512133,-0.943172990270231,approximately linear,0.01422264128753712
+3,Dataset_3772,gradient_boosting,Si Particle Size (um),Plunging Speed,0.049629933835400444,positive,0.978837325479093,0.943172990270231,approximately linear,0.01422264128753712

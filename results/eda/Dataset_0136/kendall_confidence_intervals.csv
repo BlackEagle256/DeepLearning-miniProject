@@ -1,0 +1,46 @@
+var_a,var_b,tau,p_value,ci_lower,ci_upper
+Tool Shape,Rotational Speed,0.0,1.0,-0.3073,0.281
+Tool Shape,Plunging Speed,0.0,1.0,-0.3054,0.2834
+Tool Shape,Si Particle Size (um),-0.2404,0.0717,-0.4756,0.0319
+Tool Shape,Hardness (HV),0.3467,0.0093,0.1047,0.562
+Tool Shape,wear rate,-0.2419,0.0675,-0.4633,-0.002
+Tool Shape,Ultimate Compression Strength (MPa),0.3156,0.0173,0.0533,0.5435
+Tool Shape,Elongation (%),0.1845,0.1675,-0.0814,0.4309
+Tool Shape,Temperature (°C),-0.1728,0.1916,-0.4305,0.0935
+Tool Shape,Strain,0.1418,0.2831,-0.1239,0.3887
+Rotational Speed,Plunging Speed,0.0,1.0,-0.2946,0.2923
+Rotational Speed,Si Particle Size (um),-0.7676,0.0,-0.8435,-0.6686
+Rotational Speed,Hardness (HV),0.6026,0.0,0.4501,0.7205
+Rotational Speed,wear rate,-0.6516,0.0,-0.7651,-0.5054
+Rotational Speed,Ultimate Compression Strength (MPa),-0.3103,0.0158,-0.4992,-0.1039
+Rotational Speed,Elongation (%),-0.2874,0.0265,-0.5156,-0.0296
+Rotational Speed,Temperature (°C),0.7295,0.0,0.6041,0.8202
+Rotational Speed,Strain,0.7301,0.0,0.6257,0.8134
+Plunging Speed,Si Particle Size (um),0.2346,0.0789,-0.0143,0.4775
+Plunging Speed,Hardness (HV),-0.3428,0.0101,-0.5693,-0.0967
+Plunging Speed,wear rate,0.3629,0.0061,0.1204,0.5844
+Plunging Speed,Ultimate Compression Strength (MPa),0.5369,0.0001,0.3354,0.6967
+Plunging Speed,Elongation (%),0.1883,0.1587,-0.1151,0.4627
+Plunging Speed,Temperature (°C),-0.3379,0.0107,-0.5637,-0.0817
+Plunging Speed,Strain,-0.3604,0.0064,-0.5735,-0.1191
+Si Particle Size (um),Hardness (HV),-0.8451,0.0,-0.9117,-0.7621
+Si Particle Size (um),wear rate,0.865,0.0,0.7888,0.9265
+Si Particle Size (um),Ultimate Compression Strength (MPa),0.3239,0.0061,0.1259,0.508
+Si Particle Size (um),Elongation (%),0.2829,0.0174,0.0232,0.5124
+Si Particle Size (um),Temperature (°C),-0.627,0.0,-0.7347,-0.5128
+Si Particle Size (um),Strain,-0.8572,0.0,-0.9142,-0.7921
+Hardness (HV),wear rate,-0.8563,0.0,-0.9177,-0.7853
+Hardness (HV),Ultimate Compression Strength (MPa),-0.3092,0.0088,-0.4975,-0.1056
+Hardness (HV),Elongation (%),-0.2323,0.0506,-0.4589,0.0231
+Hardness (HV),Temperature (°C),0.5446,0.0,0.4168,0.6639
+Hardness (HV),Strain,0.8004,0.0,0.6982,0.8845
+wear rate,Ultimate Compression Strength (MPa),0.3432,0.0034,0.128,0.5289
+wear rate,Elongation (%),0.2705,0.0218,-0.005,0.5211
+wear rate,Temperature (°C),-0.5987,0.0,-0.7224,-0.4648
+wear rate,Strain,-0.849,0.0,-0.9233,-0.7566
+Ultimate Compression Strength (MPa),Elongation (%),0.5085,0.0,0.2964,0.6827
+Ultimate Compression Strength (MPa),Temperature (°C),-0.5954,0.0,-0.7469,-0.4141
+Ultimate Compression Strength (MPa),Strain,-0.4287,0.0002,-0.6033,-0.2251
+Elongation (%),Temperature (°C),-0.4509,0.0001,-0.6944,-0.1676
+Elongation (%),Strain,-0.3409,0.0038,-0.5914,-0.0562
+Temperature (°C),Strain,0.7122,0.0,0.6049,0.7941

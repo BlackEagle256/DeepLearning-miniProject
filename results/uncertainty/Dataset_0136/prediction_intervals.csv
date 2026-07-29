@@ -1,0 +1,78 @@
+dataset,target,model,is_top3,pi_mean_width,pi_coverage
+Dataset_0136,Si Particle Size (um),ann,False,0.6957128846207952,0.7222222222222222
+Dataset_0136,Si Particle Size (um),elasticnet,False,0.36978257359567984,0.5277777777777778
+Dataset_0136,Si Particle Size (um),extra_trees,False,0.7165169862831363,0.75
+Dataset_0136,Si Particle Size (um),gpr,False,0.8531588351786767,0.8611111111111112
+Dataset_0136,Si Particle Size (um),gradient_boosting,True,0.6566044954341931,0.8888888888888888
+Dataset_0136,Si Particle Size (um),lightgbm,True,0.6475931748007535,0.8888888888888888
+Dataset_0136,Si Particle Size (um),linear_regression,False,0.35018904055626743,0.5277777777777778
+Dataset_0136,Si Particle Size (um),random_forest,False,0.7191881769439399,0.7222222222222222
+Dataset_0136,Si Particle Size (um),ridge,False,0.3406542476634158,0.5277777777777778
+Dataset_0136,Si Particle Size (um),svr_rbf,False,0.5013414498406946,0.5
+Dataset_0136,Si Particle Size (um),xgboost,True,0.465142002536191,0.8611111111111112
+Dataset_0136,Hardness (HV),ann,False,4.615486311233817,0.7222222222222222
+Dataset_0136,Hardness (HV),elasticnet,False,1.9519072698423434,0.3888888888888889
+Dataset_0136,Hardness (HV),extra_trees,False,6.309782914599863,0.8055555555555556
+Dataset_0136,Hardness (HV),gpr,False,5.801828728768703,0.9722222222222222
+Dataset_0136,Hardness (HV),gradient_boosting,True,5.268752840218075,0.8611111111111112
+Dataset_0136,Hardness (HV),lightgbm,True,4.759705619362713,0.8611111111111112
+Dataset_0136,Hardness (HV),linear_regression,False,1.9731580485174927,0.4444444444444444
+Dataset_0136,Hardness (HV),random_forest,False,6.148152417764199,0.75
+Dataset_0136,Hardness (HV),ridge,False,1.9333766012786806,0.3611111111111111
+Dataset_0136,Hardness (HV),svr_rbf,False,4.083800864172986,0.3611111111111111
+Dataset_0136,Hardness (HV),xgboost,True,3.5847886933220767,0.8055555555555556
+Dataset_0136,wear rate,ann,False,0.7442299361255571,0.6388888888888888
+Dataset_0136,wear rate,elasticnet,False,0.4313819493674775,0.4444444444444444
+Dataset_0136,wear rate,extra_trees,False,0.9545019396700609,0.7222222222222222
+Dataset_0136,wear rate,gpr,False,1.0790150738300357,0.9722222222222222
+Dataset_0136,wear rate,gradient_boosting,True,0.8047559948567636,0.8611111111111112
+Dataset_0136,wear rate,lightgbm,True,0.771643212458986,0.8611111111111112
+Dataset_0136,wear rate,linear_regression,False,0.429259303484746,0.5277777777777778
+Dataset_0136,wear rate,random_forest,False,0.966214271019218,0.75
+Dataset_0136,wear rate,ridge,False,0.4122070858223577,0.4166666666666667
+Dataset_0136,wear rate,svr_rbf,False,0.6230180083029443,0.5277777777777778
+Dataset_0136,wear rate,xgboost,True,0.5797100037336349,0.8611111111111112
+Dataset_0136,Ultimate Compression Strength (MPa),ann,False,20.849424394521186,0.7777777777777778
+Dataset_0136,Ultimate Compression Strength (MPa),elasticnet,False,12.212899705294298,0.4166666666666667
+Dataset_0136,Ultimate Compression Strength (MPa),extra_trees,False,17.616170013319348,0.6944444444444444
+Dataset_0136,Ultimate Compression Strength (MPa),gpr,False,16.363093871599546,0.9722222222222222
+Dataset_0136,Ultimate Compression Strength (MPa),gradient_boosting,True,18.179510287204877,0.8888888888888888
+Dataset_0136,Ultimate Compression Strength (MPa),lightgbm,True,16.571350657655753,0.9166666666666666
+Dataset_0136,Ultimate Compression Strength (MPa),linear_regression,False,12.833667077383858,0.5
+Dataset_0136,Ultimate Compression Strength (MPa),random_forest,False,17.58685208360894,0.6944444444444444
+Dataset_0136,Ultimate Compression Strength (MPa),ridge,False,12.366680581701743,0.4722222222222222
+Dataset_0136,Ultimate Compression Strength (MPa),svr_rbf,False,13.906361057801758,0.3333333333333333
+Dataset_0136,Ultimate Compression Strength (MPa),xgboost,True,13.761840332878961,0.9166666666666666
+Dataset_0136,Elongation (%),ann,False,5.255143324160723,0.7222222222222222
+Dataset_0136,Elongation (%),elasticnet,False,3.721358303881731,0.4722222222222222
+Dataset_0136,Elongation (%),extra_trees,False,4.285824529796971,0.6944444444444444
+Dataset_0136,Elongation (%),gpr,False,6.82978615606823,0.9444444444444444
+Dataset_0136,Elongation (%),gradient_boosting,True,4.906144341803759,0.8055555555555556
+Dataset_0136,Elongation (%),lightgbm,True,4.327413558662856,0.8888888888888888
+Dataset_0136,Elongation (%),linear_regression,False,4.044210285434631,0.5555555555555556
+Dataset_0136,Elongation (%),random_forest,False,3.9074069418181474,0.6944444444444444
+Dataset_0136,Elongation (%),ridge,False,3.9039361249261635,0.5277777777777778
+Dataset_0136,Elongation (%),svr_rbf,False,2.671485931519806,0.4166666666666667
+Dataset_0136,Elongation (%),xgboost,True,4.497309025790957,0.75
+Dataset_0136,Temperature (°C),ann,False,29.21085996508708,0.7222222222222222
+Dataset_0136,Temperature (°C),elasticnet,False,11.137477679024634,0.3333333333333333
+Dataset_0136,Temperature (°C),extra_trees,False,27.994569594673774,0.7777777777777778
+Dataset_0136,Temperature (°C),gpr,False,9.771148257344187,0.9722222222222222
+Dataset_0136,Temperature (°C),gradient_boosting,True,22.969945243032026,0.9444444444444444
+Dataset_0136,Temperature (°C),lightgbm,True,27.153217764421008,0.9722222222222222
+Dataset_0136,Temperature (°C),linear_regression,False,11.328935889802771,0.3055555555555556
+Dataset_0136,Temperature (°C),random_forest,False,28.483023280179193,0.7222222222222222
+Dataset_0136,Temperature (°C),ridge,False,11.171460884077625,0.3055555555555556
+Dataset_0136,Temperature (°C),svr_rbf,False,26.99848967126653,0.3333333333333333
+Dataset_0136,Temperature (°C),xgboost,True,16.02084799872504,0.9722222222222222
+Dataset_0136,Strain,ann,False,22.01139847520991,0.7222222222222222
+Dataset_0136,Strain,elasticnet,False,7.419937972470671,0.4444444444444444
+Dataset_0136,Strain,extra_trees,False,25.75756943847362,0.8333333333333334
+Dataset_0136,Strain,gpr,False,6.248488176944034,0.9722222222222222
+Dataset_0136,Strain,gradient_boosting,True,20.952588487603897,0.9444444444444444
+Dataset_0136,Strain,lightgbm,True,22.106403824131544,0.9722222222222222
+Dataset_0136,Strain,linear_regression,False,7.527987036512125,0.5
+Dataset_0136,Strain,random_forest,False,26.48135879380134,0.75
+Dataset_0136,Strain,ridge,False,7.36794259922816,0.4166666666666667
+Dataset_0136,Strain,svr_rbf,False,27.100066999056878,0.2777777777777778
+Dataset_0136,Strain,xgboost,True,14.34083223607805,0.9166666666666666

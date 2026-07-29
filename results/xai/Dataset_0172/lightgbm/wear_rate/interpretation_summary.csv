@@ -1,0 +1,5 @@
+rank,dataset,model,target,feature,mean_abs_shap,effect_sign,pearson_r_feature_vs_shap,spearman_rho_feature_vs_shap,linearity,interaction_strength_ratio
+1,Dataset_0172,lightgbm,wear rate,Composite Volume Fraction (%),1.173354232064758,negative,-0.9982077867073547,-0.8661089445557502,approximately linear,0.00480707653846979
+2,Dataset_0172,lightgbm,wear rate,Rotational Speed,0.6080188801486837,negative,-0.9597585337561723,-0.9599708741886693,approximately linear,0.00480707653846979
+3,Dataset_0172,lightgbm,wear rate,Plunging Speed,0.3423420028843202,positive,0.9877332544519686,0.9428999892542551,approximately linear,0.00480707653846979
+4,Dataset_0172,lightgbm,wear rate,Tool Shape,0.2341551237034331,negative,-0.9816178121188746,-0.9428999892542551,approximately linear,0.00480707653846979

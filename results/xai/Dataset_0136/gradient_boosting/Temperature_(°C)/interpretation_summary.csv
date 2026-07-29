@@ -1,0 +1,4 @@
+rank,dataset,model,target,feature,mean_abs_shap,effect_sign,pearson_r_feature_vs_shap,spearman_rho_feature_vs_shap,linearity,interaction_strength_ratio
+1,Dataset_0136,gradient_boosting,Temperature (°C),Rotational Speed,22.75258502202967,positive,0.9699811254673469,0.9686196045011367,approximately linear,0.0066164587449299185
+2,Dataset_0136,gradient_boosting,Temperature (°C),Plunging Speed,10.622663998854541,negative,-0.9952871386293956,-0.943172990270231,approximately linear,0.0066164587449299185
+3,Dataset_0136,gradient_boosting,Temperature (°C),Tool Shape,5.406322660858487,negative,-0.9840430025137596,-0.943172990270231,approximately linear,0.0066164587449299185

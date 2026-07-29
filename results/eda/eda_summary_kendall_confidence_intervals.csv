@@ -1,0 +1,110 @@
+dataset,var_a,var_b,tau,p_value,ci_lower,ci_upper
+Dataset_0136,Tool Shape,Rotational Speed,0.0,1.0,-0.3073,0.281
+Dataset_0136,Tool Shape,Plunging Speed,0.0,1.0,-0.3054,0.2834
+Dataset_0136,Tool Shape,Si Particle Size (um),-0.2404,0.0717,-0.4756,0.0319
+Dataset_0136,Tool Shape,Hardness (HV),0.3467,0.0093,0.1047,0.562
+Dataset_0136,Tool Shape,wear rate,-0.2419,0.0675,-0.4633,-0.002
+Dataset_0136,Tool Shape,Ultimate Compression Strength (MPa),0.3156,0.0173,0.0533,0.5435
+Dataset_0136,Tool Shape,Elongation (%),0.1845,0.1675,-0.0814,0.4309
+Dataset_0136,Tool Shape,Temperature (°C),-0.1728,0.1916,-0.4305,0.0935
+Dataset_0136,Tool Shape,Strain,0.1418,0.2831,-0.1239,0.3887
+Dataset_0136,Rotational Speed,Plunging Speed,0.0,1.0,-0.2946,0.2923
+Dataset_0136,Rotational Speed,Si Particle Size (um),-0.7676,0.0,-0.8435,-0.6686
+Dataset_0136,Rotational Speed,Hardness (HV),0.6026,0.0,0.4501,0.7205
+Dataset_0136,Rotational Speed,wear rate,-0.6516,0.0,-0.7651,-0.5054
+Dataset_0136,Rotational Speed,Ultimate Compression Strength (MPa),-0.3103,0.0158,-0.4992,-0.1039
+Dataset_0136,Rotational Speed,Elongation (%),-0.2874,0.0265,-0.5156,-0.0296
+Dataset_0136,Rotational Speed,Temperature (°C),0.7295,0.0,0.6041,0.8202
+Dataset_0136,Rotational Speed,Strain,0.7301,0.0,0.6257,0.8134
+Dataset_0136,Plunging Speed,Si Particle Size (um),0.2346,0.0789,-0.0143,0.4775
+Dataset_0136,Plunging Speed,Hardness (HV),-0.3428,0.0101,-0.5693,-0.0967
+Dataset_0136,Plunging Speed,wear rate,0.3629,0.0061,0.1204,0.5844
+Dataset_0136,Plunging Speed,Ultimate Compression Strength (MPa),0.5369,0.0001,0.3354,0.6967
+Dataset_0136,Plunging Speed,Elongation (%),0.1883,0.1587,-0.1151,0.4627
+Dataset_0136,Plunging Speed,Temperature (°C),-0.3379,0.0107,-0.5637,-0.0817
+Dataset_0136,Plunging Speed,Strain,-0.3604,0.0064,-0.5735,-0.1191
+Dataset_0136,Si Particle Size (um),Hardness (HV),-0.8451,0.0,-0.9117,-0.7621
+Dataset_0136,Si Particle Size (um),wear rate,0.865,0.0,0.7888,0.9265
+Dataset_0136,Si Particle Size (um),Ultimate Compression Strength (MPa),0.3239,0.0061,0.1259,0.508
+Dataset_0136,Si Particle Size (um),Elongation (%),0.2829,0.0174,0.0232,0.5124
+Dataset_0136,Si Particle Size (um),Temperature (°C),-0.627,0.0,-0.7347,-0.5128
+Dataset_0136,Si Particle Size (um),Strain,-0.8572,0.0,-0.9142,-0.7921
+Dataset_0136,Hardness (HV),wear rate,-0.8563,0.0,-0.9177,-0.7853
+Dataset_0136,Hardness (HV),Ultimate Compression Strength (MPa),-0.3092,0.0088,-0.4975,-0.1056
+Dataset_0136,Hardness (HV),Elongation (%),-0.2323,0.0506,-0.4589,0.0231
+Dataset_0136,Hardness (HV),Temperature (°C),0.5446,0.0,0.4168,0.6639
+Dataset_0136,Hardness (HV),Strain,0.8004,0.0,0.6982,0.8845
+Dataset_0136,wear rate,Ultimate Compression Strength (MPa),0.3432,0.0034,0.128,0.5289
+Dataset_0136,wear rate,Elongation (%),0.2705,0.0218,-0.005,0.5211
+Dataset_0136,wear rate,Temperature (°C),-0.5987,0.0,-0.7224,-0.4648
+Dataset_0136,wear rate,Strain,-0.849,0.0,-0.9233,-0.7566
+Dataset_0136,Ultimate Compression Strength (MPa),Elongation (%),0.5085,0.0,0.2964,0.6827
+Dataset_0136,Ultimate Compression Strength (MPa),Temperature (°C),-0.5954,0.0,-0.7469,-0.4141
+Dataset_0136,Ultimate Compression Strength (MPa),Strain,-0.4287,0.0002,-0.6033,-0.2251
+Dataset_0136,Elongation (%),Temperature (°C),-0.4509,0.0001,-0.6944,-0.1676
+Dataset_0136,Elongation (%),Strain,-0.3409,0.0038,-0.5914,-0.0562
+Dataset_0136,Temperature (°C),Strain,0.7122,0.0,0.6049,0.7941
+Dataset_0172,Tool Shape,Rotational Speed,0.0,1.0,-0.1984,0.2008
+Dataset_0172,Tool Shape,Plunging Speed,0.0,1.0,-0.2013,0.2023
+Dataset_0172,Tool Shape,Composite Volume Fraction (%),0.0,1.0,-0.2171,0.2158
+Dataset_0172,Tool Shape,Si Particle Size (um),-0.1239,0.1806,-0.2911,0.0526
+Dataset_0172,Tool Shape,Hardness (HV),0.307,0.001,0.1434,0.4621
+Dataset_0172,Tool Shape,wear rate,-0.1372,0.1366,-0.3082,0.0342
+Dataset_0172,Tool Shape,Ultimate Compression Strength (MPa),0.2727,0.0032,0.0984,0.4307
+Dataset_0172,Tool Shape,Elongation (%),0.1457,0.1171,-0.0337,0.3061
+Dataset_0172,Rotational Speed,Plunging Speed,0.0,1.0,-0.1986,0.2118
+Dataset_0172,Rotational Speed,Composite Volume Fraction (%),0.0,1.0,-0.2075,0.2145
+Dataset_0172,Rotational Speed,Si Particle Size (um),-0.3897,0.0,-0.5342,-0.2397
+Dataset_0172,Rotational Speed,Hardness (HV),0.5402,0.0,0.4315,0.6398
+Dataset_0172,Rotational Speed,wear rate,-0.336,0.0002,-0.4812,-0.1818
+Dataset_0172,Rotational Speed,Ultimate Compression Strength (MPa),-0.2531,0.0047,-0.3932,-0.1049
+Dataset_0172,Rotational Speed,Elongation (%),-0.2385,0.0081,-0.3951,-0.0749
+Dataset_0172,Plunging Speed,Composite Volume Fraction (%),0.0,1.0,-0.2227,0.2245
+Dataset_0172,Plunging Speed,Si Particle Size (um),0.1215,0.1892,-0.0569,0.2997
+Dataset_0172,Plunging Speed,Hardness (HV),-0.2954,0.0015,-0.458,-0.1336
+Dataset_0172,Plunging Speed,wear rate,0.2039,0.027,0.0275,0.3761
+Dataset_0172,Plunging Speed,Ultimate Compression Strength (MPa),0.4489,0.0,0.2753,0.5818
+Dataset_0172,Plunging Speed,Elongation (%),0.2092,0.0245,-0.0005,0.3874
+Dataset_0172,Composite Volume Fraction (%),Si Particle Size (um),-0.7055,0.0,-0.7204,-0.6775
+Dataset_0172,Composite Volume Fraction (%),Hardness (HV),0.3272,0.0009,0.1534,0.4857
+Dataset_0172,Composite Volume Fraction (%),wear rate,-0.6898,0.0,-0.7154,-0.6475
+Dataset_0172,Composite Volume Fraction (%),Ultimate Compression Strength (MPa),0.4053,0.0,0.2486,0.5359
+Dataset_0172,Composite Volume Fraction (%),Elongation (%),0.2859,0.0037,0.1092,0.4569
+Dataset_0172,Si Particle Size (um),Hardness (HV),-0.6501,0.0,-0.7546,-0.5311
+Dataset_0172,Si Particle Size (um),wear rate,0.9153,0.0,0.8839,0.9426
+Dataset_0172,Si Particle Size (um),Ultimate Compression Strength (MPa),-0.1291,0.1117,-0.2453,0.0012
+Dataset_0172,Si Particle Size (um),Elongation (%),-0.0708,0.3862,-0.2216,0.0872
+Dataset_0172,Hardness (HV),wear rate,-0.6707,0.0,-0.7693,-0.5625
+Dataset_0172,Hardness (HV),Ultimate Compression Strength (MPa),-0.0956,0.2426,-0.2379,0.0461
+Dataset_0172,Hardness (HV),Elongation (%),-0.0846,0.3039,-0.2394,0.0696
+Dataset_0172,wear rate,Ultimate Compression Strength (MPa),-0.1065,0.1876,-0.2314,0.0239
+Dataset_0172,wear rate,Elongation (%),-0.0677,0.4053,-0.2226,0.0938
+Dataset_0172,Ultimate Compression Strength (MPa),Elongation (%),0.5437,0.0,0.415,0.6603
+Dataset_3772,Tool Shape,Rotational Speed,0.0,1.0,-0.3073,0.281
+Dataset_3772,Tool Shape,Plunging Speed,0.0,1.0,-0.3054,0.2834
+Dataset_3772,Tool Shape,Si Particle Size (um),-0.2243,0.0921,-0.4556,0.046
+Dataset_3772,Tool Shape,Hardness (HV),0.337,0.0119,0.1017,0.5506
+Dataset_3772,Tool Shape,wear rate,-0.2573,0.0519,-0.4788,-0.0215
+Dataset_3772,Tool Shape,Ultimate Compression Strength (MPa),0.3094,0.0195,0.0727,0.516
+Dataset_3772,Tool Shape,Elongation (%),0.1359,0.3091,-0.1285,0.3728
+Dataset_3772,Rotational Speed,Plunging Speed,0.0,1.0,-0.2946,0.2923
+Dataset_3772,Rotational Speed,Si Particle Size (um),-0.7749,0.0,-0.8496,-0.6684
+Dataset_3772,Rotational Speed,Hardness (HV),0.5987,0.0,0.4273,0.7244
+Dataset_3772,Rotational Speed,wear rate,-0.6263,0.0,-0.7399,-0.4849
+Dataset_3772,Rotational Speed,Ultimate Compression Strength (MPa),-0.2808,0.0287,-0.4699,-0.08
+Dataset_3772,Rotational Speed,Elongation (%),-0.2288,0.0773,-0.4683,0.026
+Dataset_3772,Plunging Speed,Si Particle Size (um),0.2263,0.0894,-0.0244,0.4663
+Dataset_3772,Plunging Speed,Hardness (HV),-0.3156,0.0186,-0.5451,-0.0777
+Dataset_3772,Plunging Speed,wear rate,0.3821,0.0039,0.1408,0.5988
+Dataset_3772,Plunging Speed,Ultimate Compression Strength (MPa),0.5322,0.0001,0.3342,0.7039
+Dataset_3772,Plunging Speed,Elongation (%),0.2524,0.0589,-0.038,0.5133
+Dataset_3772,Si Particle Size (um),Hardness (HV),-0.8169,0.0,-0.9075,-0.6899
+Dataset_3772,Si Particle Size (um),wear rate,0.8324,0.0,0.7321,0.9134
+Dataset_3772,Si Particle Size (um),Ultimate Compression Strength (MPa),0.3018,0.0103,0.1082,0.4681
+Dataset_3772,Si Particle Size (um),Elongation (%),0.2449,0.0391,-0.0083,0.4673
+Dataset_3772,Hardness (HV),wear rate,-0.8498,0.0,-0.92,-0.7555
+Dataset_3772,Hardness (HV),Ultimate Compression Strength (MPa),-0.2684,0.0234,-0.4641,-0.068
+Dataset_3772,Hardness (HV),Elongation (%),-0.1863,0.119,-0.4044,0.0475
+Dataset_3772,wear rate,Ultimate Compression Strength (MPa),0.3363,0.004,0.1318,0.5145
+Dataset_3772,wear rate,Elongation (%),0.248,0.0356,-0.01,0.4906
+Dataset_3772,Ultimate Compression Strength (MPa),Elongation (%),0.5012,0.0,0.2618,0.6903

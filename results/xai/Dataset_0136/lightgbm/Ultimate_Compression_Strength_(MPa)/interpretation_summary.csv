@@ -1,0 +1,4 @@
+rank,dataset,model,target,feature,mean_abs_shap,effect_sign,pearson_r_feature_vs_shap,spearman_rho_feature_vs_shap,linearity,interaction_strength_ratio
+1,Dataset_0136,lightgbm,Ultimate Compression Strength (MPa),Plunging Speed,10.492317492415783,positive,0.894103827028993,0.9165342137830781,approximately linear,0.020423144879232802
+2,Dataset_0136,lightgbm,Ultimate Compression Strength (MPa),Rotational Speed,7.07618659512911,negative,-0.7996688826955575,-0.7509791501564369,approximately linear,0.020423144879232802
+3,Dataset_0136,lightgbm,Ultimate Compression Strength (MPa),Tool Shape,5.483535507864402,positive,0.9838488458807353,0.9460998335825321,approximately linear,0.020423144879232802

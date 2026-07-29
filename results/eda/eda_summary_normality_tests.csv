@@ -1,0 +1,28 @@
+dataset,variable,shapiro_stat,shapiro_p,anderson_stat,anderson_crit_5pct,ks_stat,ks_p,normal_at_5pct(shapiro)
+Dataset_0136,Tool Shape,0.7945,0.0,2.8596,0.721,0.2197,0.0525,False
+Dataset_0136,Rotational Speed,0.8617,0.0004,1.6647,0.721,0.1643,0.2564,False
+Dataset_0136,Plunging Speed,0.7899,0.0,2.9571,0.721,0.2291,0.0384,False
+Dataset_0136,Si Particle Size (um),0.9444,0.0698,0.5852,0.721,0.1441,0.4051,True
+Dataset_0136,Hardness (HV),0.9793,0.7214,0.211,0.721,0.0854,0.9353,True
+Dataset_0136,wear rate,0.9687,0.39,0.2916,0.721,0.0753,0.9772,True
+Dataset_0136,Ultimate Compression Strength (MPa),0.9792,0.7181,0.1949,0.721,0.0664,0.9942,True
+Dataset_0136,Elongation (%),0.9704,0.4366,0.31,0.721,0.1203,0.6316,True
+Dataset_0136,Temperature (°C),0.9657,0.3204,0.4342,0.721,0.1212,0.6225,True
+Dataset_0136,Strain,0.9581,0.1881,0.4567,0.721,0.1201,0.6333,True
+Dataset_0172,Tool Shape,0.7931,0.0,5.8044,0.749,0.2214,0.0014,False
+Dataset_0172,Rotational Speed,0.8599,0.0,3.385,0.749,0.1658,0.0338,False
+Dataset_0172,Plunging Speed,0.7884,0.0,6.0009,0.749,0.2307,0.0008,False
+Dataset_0172,Composite Volume Fraction (%),0.6365,0.0,12.7697,0.749,0.3397,0.0,False
+Dataset_0172,Si Particle Size (um),0.8738,0.0,3.0992,0.749,0.164,0.0368,False
+Dataset_0172,Hardness (HV),0.9888,0.7748,0.1873,0.749,0.0484,0.993,True
+Dataset_0172,wear rate,0.9665,0.0521,0.6271,0.749,0.0828,0.6762,True
+Dataset_0172,Ultimate Compression Strength (MPa),0.9931,0.9662,0.0923,0.749,0.0316,1.0,True
+Dataset_0172,Elongation (%),0.9711,0.0962,0.5164,0.749,0.0977,0.4681,True
+Dataset_3772,Tool Shape,0.7945,0.0,2.8596,0.721,0.2197,0.0525,False
+Dataset_3772,Rotational Speed,0.8617,0.0004,1.6647,0.721,0.1643,0.2564,False
+Dataset_3772,Plunging Speed,0.7899,0.0,2.9571,0.721,0.2291,0.0384,False
+Dataset_3772,Si Particle Size (um),0.9321,0.0289,0.8034,0.721,0.1664,0.2434,False
+Dataset_3772,Hardness (HV),0.9738,0.5375,0.2462,0.721,0.0851,0.9369,True
+Dataset_3772,wear rate,0.9713,0.4624,0.2595,0.721,0.0765,0.9737,True
+Dataset_3772,Ultimate Compression Strength (MPa),0.9899,0.9818,0.1147,0.721,0.0576,0.9992,True
+Dataset_3772,Elongation (%),0.9651,0.3068,0.4641,0.721,0.1339,0.4971,True

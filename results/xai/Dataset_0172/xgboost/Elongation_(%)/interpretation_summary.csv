@@ -1,0 +1,5 @@
+rank,dataset,model,target,feature,mean_abs_shap,effect_sign,pearson_r_feature_vs_shap,spearman_rho_feature_vs_shap,linearity,interaction_strength_ratio
+1,Dataset_0172,xgboost,Elongation (%),Rotational Speed,1.7890011192655857,negative,-0.40810935441088814,-0.42917751411423705,approximately linear,0.04637224578400476
+2,Dataset_0172,xgboost,Elongation (%),Composite Volume Fraction (%),1.1369890835550096,positive,0.9921898281069761,0.8661089445557502,approximately linear,0.04637224578400476
+3,Dataset_0172,xgboost,Elongation (%),Plunging Speed,1.131559858719508,positive,0.7485542633751661,0.7202708251247784,approximately linear,0.04637224578400476
+4,Dataset_0172,xgboost,Elongation (%),Tool Shape,0.5606350335963223,positive,0.9642450802094652,0.9428999892542551,approximately linear,0.04637224578400476
