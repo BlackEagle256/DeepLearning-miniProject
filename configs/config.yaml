@@ -1,10 +1,3 @@
-# =============================================================================
-# Global project configuration
-# Project: Overfitting-Resistant Surrogate Models for Friction-Processed
-#          Composites (Small Experimental Datasets)
-# Course : Deep Learning - Dr. Bahaghighat
-# =============================================================================
-
 project_name: "surrogate-composites"
 
 paths:

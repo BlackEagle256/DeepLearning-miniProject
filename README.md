@@ -1,7 +1,3 @@
-# Surrogate Models for Friction-Processed Composites (Small Data)
-
-**Deep Learning course project — Dr. Bahaghighat, Imam Khomeini International University**
-
 Development and validation of reliable, interpretable, and **overfitting-resistant**
 surrogate models (XAI-based) predicting mechanical/functional properties of
 friction-processed composites from three small experimental datasets
